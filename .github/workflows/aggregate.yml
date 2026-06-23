@@ -45,7 +45,7 @@ jobs:
 
       - name: Discover + merge catalogs
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.BOOTSTRAP_TOKEN || secrets.GITHUB_TOKEN }}
           ORG: bounded-systems
         run: node aggregate.mjs
 
