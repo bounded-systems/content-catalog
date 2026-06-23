@@ -9,6 +9,16 @@
     "value": "Org-level defaults and the public profile README for bounded-systems.",
     "$source": ".github"
   },
+  ".github-private.name": {
+    "type": "name",
+    "value": "Github Private",
+    "$source": ".github-private"
+  },
+  ".github-private.description": {
+    "type": "meta",
+    "value": "Org-level private defaults and the members-only profile README for bounded-systems.  See docs/org-map. md for the full repo map, and docs/handoffs/ for self-contained, copy-paste-ready plans for cross-repo work.",
+    "$source": ".github-private"
+  },
   "anchored-chain.name": {
     "type": "name",
     "value": "Anchored Chain",
@@ -173,6 +183,41 @@
     "type": "meta",
     "value": "Org-wide content token catalog — aggregated from opted-in repos, gated and attested by string-audit.",
     "$source": "content-catalog"
+  },
+  "dev-contracts.name": {
+    "type": "name",
+    "value": "Dev Contracts",
+    "$source": "dev-contracts"
+  },
+  "dev-contracts.tagline": {
+    "type": "tagline",
+    "value": "Last updated: 2025-04-11 by DevContracts",
+    "$source": "dev-contracts"
+  },
+  "dev-contracts.description": {
+    "type": "meta",
+    "value": "Last updated: 2025-04-11 by DevContracts DevContracts is a framework for defining, validating, and enforcing development standards, configurations, and project structure using a central specification file: contracts. toml.  It provides a suite of tools to interact with this \"d…",
+    "$source": "dev-contracts"
+  },
+  "dev-contracts-extract.name": {
+    "type": "name",
+    "value": "Dev Contracts Extract",
+    "$source": "dev-contracts-extract"
+  },
+  "dev-contracts-transform.name": {
+    "type": "name",
+    "value": "Dev Contracts Transform",
+    "$source": "dev-contracts-transform"
+  },
+  "dev-contracts-validate.name": {
+    "type": "name",
+    "value": "Dev Contracts Validate",
+    "$source": "dev-contracts-validate"
+  },
+  "dev-contracts-validate.description": {
+    "type": "meta",
+    "value": "This project defines and validates the Zod schemas used throughout the DevContracts framework.  dev-contracts-spec is a core component of the larger DevContracts project.  Its primary responsibility at this stage is to provide the canonical Zod type definitions that represent …",
+    "$source": "dev-contracts-validate"
   },
   "dev-registry.name": {
     "type": "name",
@@ -424,6 +469,16 @@
     "value": "guest-room scopes what an agent is allowed to do, and refuses everything else by construction — not by a reminder you hope it reads.  I built it for my own work.  I wanted an agent that did the task and didn't get distracted or reach for things I never granted it.",
     "$source": "guest-room"
   },
+  "hooksmith.name": {
+    "type": "name",
+    "value": "Hooksmith",
+    "$source": "hooksmith"
+  },
+  "hooksmith.description": {
+    "type": "meta",
+    "value": "Fast, workspace-style Rust tools for inspecting Git storage, performance, and repo hygiene.  Built for large monorepos and CI.",
+    "$source": "hooksmith"
+  },
   "host.name": {
     "type": "name",
     "value": "host",
@@ -443,6 +498,16 @@
     "type": "body",
     "value": "HOST · OS · AMBIENT · CAPABILITY · HOMEDIR",
     "$source": "host"
+  },
+  "lima-devshell.name": {
+    "type": "name",
+    "value": "Lima Devshell",
+    "$source": "lima-devshell"
+  },
+  "lima-devshell.description": {
+    "type": "meta",
+    "value": "Bootstrap devshell for Lima VM environments and Home Manager configuration for macOS.  This flake provides: - Minimal tooling needed to launch project devshells inside Lima VMs - Complete Home Manager configuration for macOS (integrated with Determinate Systems) This flake ser…",
+    "$source": "lima-devshell"
   },
   "lobby.name": {
     "type": "name",
@@ -563,6 +628,21 @@
     "type": "body",
     "value": "REPO-ROOT · GIT · CAPABILITY · MONOREPO · RESOLUTION",
     "$source": "repo-root"
+  },
+  "schema-bridge.name": {
+    "type": "name",
+    "value": "Schema Bridge",
+    "$source": "schema-bridge"
+  },
+  "schema-bridge.tagline": {
+    "type": "tagline",
+    "value": "We ESLint as an example cse but the hope is to make this work for any type sorcd",
+    "$source": "schema-bridge"
+  },
+  "schema-bridge.description": {
+    "type": "meta",
+    "value": "We ESLint as an example cse but the hope is to make this work for any type sorcd json.",
+    "$source": "schema-bridge"
   },
   "schema-gen.name": {
     "type": "name",
@@ -706,10 +786,16 @@
   },
   "$provenance": {
     "org": "bounded-systems",
-    "generated": "2026-06-23T19:26:12.249Z",
+    "generated": "2026-06-23T19:28:35.042Z",
     "sources": {
       ".github": {
         "sha": "0ba0d47620418700762190cf6d62313ebddcfb76",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      ".github-private": {
+        "sha": "8b0b31cbf3c7618e38835eb8dd8bf5ddbb4673e5",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
@@ -775,7 +861,31 @@
         "symbols": 1
       },
       "content-catalog": {
-        "sha": "0a82ad688f4aa552e8f406da390cf902c7e8d692",
+        "sha": "71a63191eca542c33092907f631ee6d35300a271",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "dev-contracts": {
+        "sha": "b066d686f6a981e21b42bc3165dec7daf4525b29",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 3
+      },
+      "dev-contracts-extract": {
+        "sha": "bd6f0d21bcc044d4b0160c6ad82ed27e498756b8",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 1
+      },
+      "dev-contracts-transform": {
+        "sha": "0a4b6908dda6aa18349450ec86ed470a7fc12d46",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 1
+      },
+      "dev-contracts-validate": {
+        "sha": "33f2697b550998e0552ff601d723bb48f4f90a3c",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
@@ -888,11 +998,23 @@
         "catalogPath": "content/strings.json",
         "symbols": 3
       },
+      "hooksmith": {
+        "sha": "90637abb48d08fd57f0cc60426efc2e635770182",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
       "host": {
         "sha": "b5d5cda219770f0a7d343025d3060e789f39dbb6",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 4
+      },
+      "lima-devshell": {
+        "sha": "743200bfab80e7957d603dcd2d2af55e9d8a8e89",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
       },
       "lobby": {
         "sha": "bbfb478aa36c1602f48df7430967ab7c9fbbb03c",
@@ -942,6 +1064,12 @@
         "catalogPath": "content/strings.json",
         "symbols": 4
       },
+      "schema-bridge": {
+        "sha": "8eca2853af987830d01ad497b3507d7fe87cc665",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 3
+      },
       "schema-gen": {
         "sha": "168413cb875a296363ca25f93615cda4bd41f606",
         "branch": "main",
@@ -967,7 +1095,7 @@
         "symbols": 4
       },
       "string-audit": {
-        "sha": "79fd2c4914b0a30b392d9be6b6d87cfd6785c963",
+        "sha": "6f57a0c1e1786440d0cb314d89aeed92a592e614",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
