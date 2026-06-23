@@ -1,0 +1,47 @@
+name: bootstrap
+
+# One-shot: scan every repo in the org for content catalogs and commit
+# .string-audit.json sentinels to the ones that have them.
+# Run from the Actions tab; set dry-run: false to actually commit.
+#
+# Requires a PAT stored as BOOTSTRAP_TOKEN with repo write access across
+# the org (GITHUB_TOKEN can only write to this repo). The script falls back
+# to GITHUB_TOKEN for dry runs since it only needs read access.
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: "Scan only (true) or commit sentinels (false)"
+        type: boolean
+        default: true
+      repo:
+        description: "Single repo name to target (leave blank for all)"
+        type: string
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22"
+      - run: npm ci --no-audit --no-fund
+      - name: Bootstrap sentinels
+        env:
+          GITHUB_TOKEN: ${{ secrets.BOOTSTRAP_TOKEN || secrets.GITHUB_TOKEN }}
+          ORG: bounded-systems
+        run: >
+          node bootstrap.mjs
+          ${{ inputs.dry-run == false && '--write' || '' }}
+          ${{ inputs.repo != '' && format('--repo={0}', inputs.repo) || '' }}
+      - name: Upload report
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: bootstrap-report
+          path: bootstrap-report.json
