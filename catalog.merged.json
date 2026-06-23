@@ -786,7 +786,7 @@
   },
   "$provenance": {
     "org": "bounded-systems",
-    "generated": "2026-06-23T19:28:35.042Z",
+    "generated": "2026-06-23T19:48:40.512Z",
     "sources": {
       ".github": {
         "sha": "0ba0d47620418700762190cf6d62313ebddcfb76",
@@ -861,7 +861,7 @@
         "symbols": 1
       },
       "content-catalog": {
-        "sha": "71a63191eca542c33092907f631ee6d35300a271",
+        "sha": "de1fbd07277d83dc4de4ce358efdfdb01146aa46",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
@@ -1035,7 +1035,7 @@
         "symbols": 4
       },
       "ocap-provenance": {
-        "sha": "e9632bb8d0284c2acd754e50720bc200cb234a4c",
+        "sha": "758251009d397c661250c0ff7e44c563a8ccb7b8",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
@@ -1095,7 +1095,7 @@
         "symbols": 4
       },
       "string-audit": {
-        "sha": "6f57a0c1e1786440d0cb314d89aeed92a592e614",
+        "sha": "58491aad16fd807c2befaca6ae13740a115edb8c",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
