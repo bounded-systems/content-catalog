@@ -1,4 +1,74 @@
 {
+  ".github.name": {
+    "type": "name",
+    "value": "Github",
+    "$source": ".github"
+  },
+  ".github.description": {
+    "type": "meta",
+    "value": "Org-level defaults and the public profile README for bounded-systems.",
+    "$source": ".github"
+  },
+  "anchored-chain.name": {
+    "type": "name",
+    "value": "Anchored Chain",
+    "$source": "anchored-chain"
+  },
+  "anchored-chain.description": {
+    "type": "meta",
+    "value": "Derivation chain with contract validation, signing, lineage tracking, and invalidation",
+    "$source": "anchored-chain"
+  },
+  "anchored-chain-sqlite.name": {
+    "type": "name",
+    "value": "Anchored Chain Sqlite",
+    "$source": "anchored-chain-sqlite"
+  },
+  "anchored-chain-sqlite.description": {
+    "type": "meta",
+    "value": "SQLite/Drizzle-backed implementation of the anchored-chain stores",
+    "$source": "anchored-chain-sqlite"
+  },
+  "audit-context.name": {
+    "type": "name",
+    "value": "Audit Context",
+    "$source": "audit-context"
+  },
+  "audit-context.description": {
+    "type": "meta",
+    "value": "Ambient runtime context for gh-call audit attribution (verb, actor, truth reason)",
+    "$source": "audit-context"
+  },
+  "auth.name": {
+    "type": "name",
+    "value": "auth",
+    "$source": "auth"
+  },
+  "auth.description": {
+    "type": "meta",
+    "value": "Service-credential resolver (GitHub, Notion) through a single sanctioned access point",
+    "$source": "auth"
+  },
+  "bd.name": {
+    "type": "name",
+    "value": "bd",
+    "$source": "bd"
+  },
+  "bd.description": {
+    "type": "meta",
+    "value": "Typed interface to the beads CLI with policy enforcement and short-ID guards",
+    "$source": "bd"
+  },
+  "bounded.tools.name": {
+    "type": "name",
+    "value": "Bounded Tools",
+    "$source": "bounded.tools"
+  },
+  "bounded.tools.description": {
+    "type": "meta",
+    "value": "GitHub App receiver + setup endpoint for prx (bounded-systems-prx).",
+    "$source": "bounded.tools"
+  },
   "brand.name": {
     "$value": "Bounded Systems",
     "$description": "Org name — exact casing.",
@@ -23,6 +93,326 @@
     "$value": "CAPABILITY SECURITY · AGENT INFRASTRUCTURE · AI · DEVELOPER TOOLS",
     "$description": "Short all-caps keyword strip — SVG headers, meta keywords.",
     "$source": "brand"
+  },
+  "cas.name": {
+    "type": "name",
+    "value": "cas",
+    "$source": "cas"
+  },
+  "cas.description": {
+    "type": "meta",
+    "value": "Content-addressable storage substrate: bytes addressed by their SHA-256 digest, with a storage-agnostic blob-store port",
+    "$source": "cas"
+  },
+  "claude-box.name": {
+    "type": "name",
+    "value": "Claude Box",
+    "$source": "claude-box"
+  },
+  "claude-box.description": {
+    "type": "meta",
+    "value": "A pinned, isolated, multi-account Claude runtime — Claude Code in a",
+    "$source": "claude-box"
+  },
+  "claude-token-tools.name": {
+    "type": "name",
+    "value": "Claude Token Tools",
+    "$source": "claude-token-tools"
+  },
+  "content-catalog.name": {
+    "type": "name",
+    "value": "Content Catalog",
+    "$source": "content-catalog"
+  },
+  "content-catalog.description": {
+    "type": "meta",
+    "value": "Org-wide content token catalog — aggregated from opted-in repos, gated and attested by string-audit.",
+    "$source": "content-catalog"
+  },
+  "dev-registry.name": {
+    "type": "name",
+    "value": "Dev Registry",
+    "$source": "dev-registry"
+  },
+  "dev-registry.description": {
+    "type": "meta",
+    "value": "DevRegistry is a local-first container registry and devcontainer build system designed to streamline development workflows. It provides a robust, OCI-compatible environment for building, storing, and managing container images directly on your local machine, while also offering seamless integration with Git, devcontainers, and advanced traceability features.",
+    "$source": "dev-registry"
+  },
+  "disposition.name": {
+    "type": "name",
+    "value": "Disposition",
+    "$source": "disposition"
+  },
+  "disposition.description": {
+    "type": "meta",
+    "value": "Pure classifier mapping work-unit surface state to a disposition (ok/prune/repair/review)",
+    "$source": "disposition"
+  },
+  "door-concierge.name": {
+    "type": "name",
+    "value": "Door Concierge",
+    "$source": "door-concierge"
+  },
+  "door-concierge.description": {
+    "type": "meta",
+    "value": "door-concierge is concierged packaged as a standalone, pinned OCI image. concierged is an",
+    "$source": "door-concierge"
+  },
+  "door-keeper.name": {
+    "type": "name",
+    "value": "Door Keeper",
+    "$source": "door-keeper"
+  },
+  "door-keeper.description": {
+    "type": "meta",
+    "value": "door-keeper is keeperd packaged as a standalone, pinned OCI image. keeperd holds the box's",
+    "$source": "door-keeper"
+  },
+  "door-kit.name": {
+    "type": "name",
+    "value": "Door Kit",
+    "$source": "door-kit"
+  },
+  "door-kit.description": {
+    "type": "meta",
+    "value": "In-box door-client SDK for claude-box's capability doors (keeper/scout/concierge/spawn), over the guest-room protocol.",
+    "$source": "door-kit"
+  },
+  "door-net.name": {
+    "type": "name",
+    "value": "Door Net",
+    "$source": "door-net"
+  },
+  "door-net.description": {
+    "type": "meta",
+    "value": "door-net is netd packaged as a standalone, pinned OCI image. netd is the only egress path",
+    "$source": "door-net"
+  },
+  "door-peercred.name": {
+    "type": "name",
+    "value": "Door Peercred",
+    "$source": "door-peercred"
+  },
+  "door-peercred.description": {
+    "type": "meta",
+    "value": "A tiny, dependency-free Rust binary that reads SOPEERCRED off a unix socket and injects the",
+    "$source": "door-peercred"
+  },
+  "door-scout.name": {
+    "type": "name",
+    "value": "Door Scout",
+    "$source": "door-scout"
+  },
+  "door-scout.description": {
+    "type": "meta",
+    "value": "door-scout is scoutd packaged as a standalone, pinned OCI image. scoutd holds external read",
+    "$source": "door-scout"
+  },
+  "env.name": {
+    "type": "name",
+    "value": "env",
+    "$source": "env"
+  },
+  "env.description": {
+    "type": "meta",
+    "value": "The one sanctioned reader of process.env, routing ambient config through capability imports",
+    "$source": "env"
+  },
+  "facilities.name": {
+    "type": "name",
+    "value": "Facilities",
+    "$source": "facilities"
+  },
+  "frond.name": {
+    "type": "name",
+    "value": "Frond",
+    "$source": "frond"
+  },
+  "frond.description": {
+    "type": "meta",
+    "value": "This project demonstrates a simple round-trip validation for JavaScript and TypeScript files using Deno and the SWC library.",
+    "$source": "frond"
+  },
+  "fs.name": {
+    "type": "name",
+    "value": "fs",
+    "$source": "fs"
+  },
+  "fs.description": {
+    "type": "meta",
+    "value": "Filesystem capability seam; the one allowed filesystem-access point with an injectable FileSystem",
+    "$source": "fs"
+  },
+  "gh.name": {
+    "type": "name",
+    "value": "gh",
+    "$source": "gh"
+  },
+  "gh.description": {
+    "type": "meta",
+    "value": "GitHub CLI wrapper with policy enforcement, rate-limit gating, and budget audit logging",
+    "$source": "gh"
+  },
+  "gh-project-room.name": {
+    "type": "name",
+    "value": "Gh Project Room",
+    "$source": "gh-project-room"
+  },
+  "gh-project-room.description": {
+    "type": "meta",
+    "value": "The Front Desk projection + sync room for bounded-systems — keeps org",
+    "$source": "gh-project-room"
+  },
+  "git.name": {
+    "type": "name",
+    "value": "git",
+    "$source": "git"
+  },
+  "git.description": {
+    "type": "meta",
+    "value": "Git CLI wrapper with policy enforcement and stale-lock recovery",
+    "$source": "git"
+  },
+  "git-ast.name": {
+    "type": "name",
+    "value": "Git Ast",
+    "$source": "git-ast"
+  },
+  "git-ast.description": {
+    "type": "meta",
+    "value": "Git AST provides language-aware extensions for Git, leveraging Abstract Syntax Trees (ASTs) instead of traditional line-based diffs. This enhances Git with semantic understanding, leading to more meaningful history, easier merges, and enhanced code consistency.",
+    "$source": "git-ast"
+  },
+  "github-budget.name": {
+    "type": "name",
+    "value": "Github Budget",
+    "$source": "github-budget"
+  },
+  "github-budget.description": {
+    "type": "meta",
+    "value": "Rate-limit-aware gh wrapper with bucket classification, pre-call gating, and audit trail",
+    "$source": "github-budget"
+  },
+  "guest-room.name": {
+    "type": "name",
+    "value": "Guest Room",
+    "$source": "guest-room"
+  },
+  "guest-room.description": {
+    "type": "meta",
+    "value": "Guest-agnostic room+door capability runtime — the core library claude-box is built on.",
+    "$source": "guest-room"
+  },
+  "host.name": {
+    "type": "name",
+    "value": "host",
+    "$source": "host"
+  },
+  "host.description": {
+    "type": "meta",
+    "value": "The one sanctioned reader of host/OS ambient state (home dir, temp dir, hostname), routing ambient authority through capability imports",
+    "$source": "host"
+  },
+  "lobby.name": {
+    "type": "name",
+    "value": "Lobby",
+    "$source": "lobby"
+  },
+  "lobby.description": {
+    "type": "meta",
+    "value": "A knowledge corpus where every note conforms to a contract. Notes are typed;",
+    "$source": "lobby"
+  },
+  "lone.name": {
+    "type": "name",
+    "value": "lone",
+    "$source": "lone"
+  },
+  "lone.description": {
+    "type": "meta",
+    "value": "Lone turns an untrusted DOM subtree into a Blessed<T> — a branded",
+    "$source": "lone"
+  },
+  "machine-schema.name": {
+    "type": "name",
+    "value": "Machine Schema",
+    "$source": "machine-schema"
+  },
+  "machine-schema.description": {
+    "type": "meta",
+    "value": "Brands, handoff envelope, and state/phase/invariant primitives for work-unit machines",
+    "$source": "machine-schema"
+  },
+  "ocap-provenance.name": {
+    "type": "name",
+    "value": "Ocap Provenance",
+    "$source": "ocap-provenance"
+  },
+  "ocap-provenance.description": {
+    "type": "meta",
+    "value": "Capability-use provenance — a schema + SLSA mapping binding each privileged effect to a signed owner and an auditable chain.",
+    "$source": "ocap-provenance"
+  },
+  "policy.name": {
+    "type": "name",
+    "value": "Policy",
+    "$source": "policy"
+  },
+  "policy.description": {
+    "type": "meta",
+    "value": "Tool-policy engine enforcing subcommand allowlists by tool, state, and role",
+    "$source": "policy"
+  },
+  "proc.name": {
+    "type": "name",
+    "value": "proc",
+    "$source": "proc"
+  },
+  "proc.description": {
+    "type": "meta",
+    "value": "The one allowed subprocess spawn point, routing external-tool invocations through a capability",
+    "$source": "proc"
+  },
+  "prx.name": {
+    "type": "name",
+    "value": "prx",
+    "$source": "prx"
+  },
+  "prx.description": {
+    "type": "meta",
+    "value": "Generated by bun run readme:render from community/community.json and the",
+    "$source": "prx"
+  },
+  "repo-root.name": {
+    "type": "name",
+    "value": "Repo Root",
+    "$source": "repo-root"
+  },
+  "repo-root.description": {
+    "type": "meta",
+    "value": "Repo-root resolution capability: lazy git-based runtime root plus the eager .git-marker walk for build/codegen, the one sanctioned root-resolution point",
+    "$source": "repo-root"
+  },
+  "schema-gen.name": {
+    "type": "name",
+    "value": "Schema Gen",
+    "$source": "schema-gen"
+  },
+  "schema-gen.description": {
+    "type": "meta",
+    "value": "Project zod schemas to explicit, fast-types-clean TypeScript (zod → JSON Schema → .d.ts)",
+    "$source": "schema-gen"
+  },
+  "scout.name": {
+    "type": "name",
+    "value": "Scout",
+    "$source": "scout"
+  },
+  "scout.description": {
+    "type": "meta",
+    "value": "Content-addressed surface reads (file/grep/files) with anchored-chain provenance",
+    "$source": "scout"
   },
   "site.hero-pitch": {
     "$value": "Your coding agent wanders. Keep it inside the job you gave it.",
@@ -49,21 +439,341 @@
     "$description": "Contact call-to-action label.",
     "$source": "site"
   },
+  "slack.name": {
+    "type": "name",
+    "value": "Slack",
+    "$source": "slack"
+  },
+  "slack.description": {
+    "type": "meta",
+    "value": "Policy-gated, provenance-tracked Slack read surface: bounded read ops behind a swappable transport port, with keymaker-minted scoped credentials",
+    "$source": "slack"
+  },
+  "string-audit.name": {
+    "type": "name",
+    "value": "String Audit",
+    "$source": "string-audit"
+  },
+  "string-audit.description": {
+    "type": "meta",
+    "value": "Cost-aware, grounded content auditor — typed string symbols, type-scoped audits, CAS-memoized LLM calls.",
+    "$source": "string-audit"
+  },
+  "surface-sync.name": {
+    "type": "name",
+    "value": "Surface Sync",
+    "$source": "surface-sync"
+  },
+  "surface-sync.description": {
+    "type": "meta",
+    "value": "Type ontology for work-unit change-detection across GH/branch/worktree/tmux/beads",
+    "$source": "surface-sync"
+  },
+  "unfold-obsidian-vault.name": {
+    "type": "name",
+    "value": "Unfold Obsidian Vault",
+    "$source": "unfold-obsidian-vault"
+  },
+  "unfold-obsidian-vault.description": {
+    "type": "meta",
+    "value": "title: Unfold Obsidian Vault",
+    "$source": "unfold-obsidian-vault"
+  },
+  "verbspec.name": {
+    "type": "name",
+    "value": "Verbspec",
+    "$source": "verbspec"
+  },
+  "verbspec.description": {
+    "type": "meta",
+    "value": "Spec-driven CLI core: author a verb once as a typed VerbSpec, project it to CLI, MCP, OpenAPI, and Anthropic tool surfaces",
+    "$source": "verbspec"
+  },
   "$provenance": {
     "org": "bounded-systems",
-    "generated": "2026-06-23T19:03:03.670Z",
+    "generated": "2026-06-23T19:14:35.287Z",
     "sources": {
+      ".github": {
+        "sha": "f93acc82461c28235d79f14bf0ebebfb96ad5741",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "anchored-chain": {
+        "sha": "00671bd1d4e89cbf409f56e492ab7d87d250fce5",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "anchored-chain-sqlite": {
+        "sha": "d1e24c40468c9e51882bae9be4e6d1d9d9d1cdca",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "audit-context": {
+        "sha": "c719d065586a6329c75b0af6087f94e055ae25a3",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "auth": {
+        "sha": "01e5e4c63e72652f16556ee9ab7291d7506de9c3",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "bd": {
+        "sha": "5a1beda68bbfc65c6dcc1a0e37a7709b6cc997b5",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "bounded.tools": {
+        "sha": "f23660d917f1b6c95e4b911b48df8ee28866052f",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
       "brand": {
-        "sha": "c1ad970cdd0dee888b5100e540bb4970ecaebf2c",
+        "sha": "951baf1de650dac8ba22f123b4c9480b2a138361",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 5
+      },
+      "cas": {
+        "sha": "ecf89fc9ab7b0098427d15c3613c1e99b9e43767",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "claude-box": {
+        "sha": "97d073251b1192dc2e092c6a7e50bd35ffa49dc0",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "claude-token-tools": {
+        "sha": "4b2c14fbe5df07dee2017c9137613d8aa6d70f45",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 1
+      },
+      "content-catalog": {
+        "sha": "3c5c2221837e2fabb3344442f198e4b8e781a3b6",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "dev-registry": {
+        "sha": "f13aee3109a166edb9c1aaa00c38d926c2678f50",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "disposition": {
+        "sha": "cbbc0fc49834a10ede92e3fceba868c3c343412a",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "door-concierge": {
+        "sha": "c97a00d43a84284f43158db5230c94a4ace1acdb",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "door-keeper": {
+        "sha": "e59946557b397f86536869f2de96948a40e7bbc1",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "door-kit": {
+        "sha": "cde059d5e65dea98dff7379c81ca87bdaa952bc8",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "door-net": {
+        "sha": "7c699e816fcc9c489559b532dbe0af913cd2e90a",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "door-peercred": {
+        "sha": "802a99307dfdbaa3c63e8634f57fffb6d735bb66",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "door-scout": {
+        "sha": "062f8b975ca4f179f3a5833c77577015da28ad8c",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "env": {
+        "sha": "b45a04a40aa965e1e56f7403411a9721240cf644",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "facilities": {
+        "sha": "00f40d914f8f69ff0b6cd8191f1ca84f5618458c",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 1
+      },
+      "frond": {
+        "sha": "45b523cbe63a90c0e21843b1eaef520181482e85",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "fs": {
+        "sha": "cf1b7d7c79ee799d3cac60bc1a58d4e33bd0856f",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "gh": {
+        "sha": "15aebc934f81e67183ce154c04525f0f277f179a",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "gh-project-room": {
+        "sha": "c614352aba15bb6f67af5c8e0e0afe94da814fea",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "git": {
+        "sha": "b4020133e6174e1ee707f56783f928adb6e299b4",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "git-ast": {
+        "sha": "92422bc9e3fe6fd9fa102be435e441a9f43d1f06",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "github-budget": {
+        "sha": "64b0e865b56bc70533525c180d02f7984d53691a",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "guest-room": {
+        "sha": "c16b4cc3d440921da2bac638cf83b6e5b081a7a7",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "host": {
+        "sha": "42b3ef85d3727fc2d0e05c56c174258cd38a2dc5",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "lobby": {
+        "sha": "499ab6192572301b275fca5e04d85e34ace9a3bb",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "lone": {
+        "sha": "4bade9f97931aead5a1ac584dbb3010cbf8c672f",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "machine-schema": {
+        "sha": "0048ba644d3f042db2ba3d754d644c293eb0cc84",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "ocap-provenance": {
+        "sha": "d0cc776e9428541ecc8fd6c5f1cd258373a01800",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "policy": {
+        "sha": "b045f0591b3c358205a26c6d9b010690604a303b",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "proc": {
+        "sha": "ea0e8b8ee165bcec42b3b281978c85b8eba85994",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "prx": {
+        "sha": "0473bedf1baf0826161b98e0fb2d330655ed423b",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "repo-root": {
+        "sha": "7af879af05f189ed11b09ba33d4d7ba8122e0046",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "schema-gen": {
+        "sha": "eac85d9830ae877e5fcbe2bc744f9067417f59a9",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "scout": {
+        "sha": "4cc40704f1eb08c7013d2eea80c351765fd5484c",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
       },
       "site": {
         "sha": "91d22351182d250b214346d56c42fee8cb532dfb",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 5
+      },
+      "slack": {
+        "sha": "674e8e40d286f991694c1fd0b5ed8e9e7f2d06b0",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "string-audit": {
+        "sha": "3f9747be674ce904a6d47930ea92e2f87eba003f",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "surface-sync": {
+        "sha": "c7a3e59b84a2881a2ea35ca9ed050b7e490f34f5",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "unfold-obsidian-vault": {
+        "sha": "5cbca92598eb82bd24b83f0f1156d6e1a66a780b",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
+      },
+      "verbspec": {
+        "sha": "78fd786ae54ad0379cd75272f126fda3952e69e5",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 2
       }
     }
   }
