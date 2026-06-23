@@ -204,6 +204,21 @@
     "value": "Dev Contracts Extract",
     "$source": "dev-contracts-extract"
   },
+  "dev-contracts-spec.name": {
+    "type": "name",
+    "value": "Dev Contracts Spec",
+    "$source": "dev-contracts-spec"
+  },
+  "dev-contracts-spec.tagline": {
+    "type": "tagline",
+    "value": "Canonical Zod schemas for the DevContracts framework.",
+    "$source": "dev-contracts-spec"
+  },
+  "dev-contracts-spec.description": {
+    "type": "meta",
+    "value": "Defines the canonical Zod schemas for the DevContracts framework, enabling declarative specification of project configurations and ensuring consistency across project artifacts.",
+    "$source": "dev-contracts-spec"
+  },
   "dev-contracts-transform.name": {
     "type": "name",
     "value": "Dev Contracts Transform",
@@ -343,6 +358,21 @@
     "type": "name",
     "value": "Facilities",
     "$source": "facilities"
+  },
+  "fold-engine.name": {
+    "type": "name",
+    "value": "Fold Engine",
+    "$source": "fold-engine"
+  },
+  "fold-engine.tagline": {
+    "type": "tagline",
+    "value": "Linked-data engine for an Obsidian vault.",
+    "$source": "fold-engine"
+  },
+  "fold-engine.description": {
+    "type": "meta",
+    "value": "JSON-LD and schema.org structure over Obsidian notes — turns a personal knowledge vault into linked, machine-readable data.",
+    "$source": "fold-engine"
   },
   "frond.name": {
     "type": "name",
@@ -786,7 +816,7 @@
   },
   "$provenance": {
     "org": "bounded-systems",
-    "generated": "2026-06-23T19:48:40.512Z",
+    "generated": "2026-06-23T19:50:19.996Z",
     "sources": {
       ".github": {
         "sha": "0ba0d47620418700762190cf6d62313ebddcfb76",
@@ -861,7 +891,7 @@
         "symbols": 1
       },
       "content-catalog": {
-        "sha": "de1fbd07277d83dc4de4ce358efdfdb01146aa46",
+        "sha": "8f1e9bbb5f786c4dc122798bf1add6c772ead1c2",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
@@ -877,6 +907,12 @@
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 1
+      },
+      "dev-contracts-spec": {
+        "sha": "c382bf65c2b1a6f835f0d8b193b1db97543b5806",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 3
       },
       "dev-contracts-transform": {
         "sha": "0a4b6908dda6aa18349450ec86ed470a7fc12d46",
@@ -949,6 +985,12 @@
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 1
+      },
+      "fold-engine": {
+        "sha": "3c4e98a6bb36c0dfc305574c125d21d307bee376",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 3
       },
       "frond": {
         "sha": "6c48128716de4ce8834b89319eb86f3a35302ecf",
@@ -1053,7 +1095,7 @@
         "symbols": 3
       },
       "prx": {
-        "sha": "d25eb7b5bab07b43cf59b7c59f01100c97be53c9",
+        "sha": "513c2bdba29f666ce72b874d06f9c80b5fa21288",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
