@@ -1,0 +1,59 @@
+name: enrich
+
+# Enriches content/strings.json for every opted-in repo with name · tagline ·
+# description · keywords extracted from README and package.json.
+# Safe to re-run: skips repos already enriched beyond the seed (>2 tokens).
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: "Preview only — do not commit"
+        type: boolean
+        default: true
+      force:
+        description: "Overwrite already-enriched catalogs"
+        type: boolean
+        default: false
+      repo:
+        description: "Single repo to target (leave blank for all)"
+        type: string
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  enrich:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version: "22"
+
+      - run: npm ci --no-audit --no-fund
+
+      - name: Enrich catalogs
+        env:
+          GITHUB_TOKEN: ${{ secrets.BOOTSTRAP_TOKEN || secrets.GITHUB_TOKEN }}
+          ORG: bounded-systems
+        run: |
+          ARGS=""
+          if [ "${{ inputs.dry-run }}" = "false" ]; then
+            ARGS="--write"
+          fi
+          if [ "${{ inputs.force }}" = "true" ]; then
+            ARGS="$ARGS --force"
+          fi
+          if [ -n "${{ inputs.repo }}" ]; then
+            ARGS="$ARGS --repo=${{ inputs.repo }}"
+          fi
+          node enrich.mjs $ARGS
+
+      - name: Upload report
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: enrich-report
+          path: enrich-report.json
