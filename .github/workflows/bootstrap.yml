@@ -1,18 +1,23 @@
 name: bootstrap
 
-# One-shot: scan every repo in the org for content catalogs and commit
-# .string-audit.json sentinels to the ones that have them.
-# Run from the Actions tab; set dry-run: false to actually commit.
+# Scans every repo in the org for content catalogs, commits .string-audit.json
+# sentinels to newly-discovered ones, then triggers the aggregate workflow so
+# the merged catalog refreshes immediately.
 #
-# Requires a PAT stored as BOOTSTRAP_TOKEN with repo write access across
-# the org (GITHUB_TOKEN can only write to this repo). The script falls back
-# to GITHUB_TOKEN for dry runs since it only needs read access.
+# Schedule: weekly (Sundays 23:00 UTC) — always writes; triggers aggregate after.
+# Manual: workflow_dispatch — dry-run by default; set dry-run=false to commit.
+#
+# Requires BOOTSTRAP_TOKEN secret: a PAT with `repo` scope across the org.
+# Without it the scan still works (GITHUB_TOKEN reads public repos), but
+# --write falls back to GITHUB_TOKEN which can only write to this repo.
 
 on:
+  schedule:
+    - cron: "0 23 * * 0" # Sundays 23:00 UTC (before Monday's aggregate at 06:00)
   workflow_dispatch:
     inputs:
       dry-run:
-        description: "Scan only (true) or commit sentinels (false)"
+        description: "Scan only — do not commit sentinels"
         type: boolean
         default: true
       repo:
@@ -22,24 +27,53 @@ on:
 
 permissions:
   contents: read
+  actions: write # needed to trigger aggregate after writing sentinels
 
 jobs:
   bootstrap:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "22"
+
       - run: npm ci --no-audit --no-fund
+
       - name: Bootstrap sentinels
         env:
           GITHUB_TOKEN: ${{ secrets.BOOTSTRAP_TOKEN || secrets.GITHUB_TOKEN }}
           ORG: bounded-systems
-        run: >
-          node bootstrap.mjs
-          ${{ inputs.dry-run == false && '--write' || '' }}
-          ${{ inputs.repo != '' && format('--repo={0}', inputs.repo) || '' }}
+        run: |
+          ARGS=""
+          # schedule always writes; dispatch respects dry-run input
+          # (boolean dispatch inputs are strings "true"/"false" in shell)
+          if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ inputs.dry-run }}" = "false" ]; then
+            ARGS="--write"
+          fi
+          if [ -n "${{ inputs.repo }}" ]; then
+            ARGS="$ARGS --repo=${{ inputs.repo }}"
+          fi
+          node bootstrap.mjs $ARGS
+
+      - name: Trigger aggregate (if new sentinels were written)
+        # Only fire when we actually wrote something — avoids a spurious aggregate run
+        # on dry-run dispatches or weeks with no new repos.
+        if: >
+          github.event_name == 'schedule' ||
+          inputs.dry-run == false
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          FOUND=$(node -e "try{const r=JSON.parse(require('fs').readFileSync('bootstrap-report.json','utf8'));process.stdout.write(String(r.found.length))}catch{process.stdout.write('0')}")
+          if [ "$FOUND" -gt "0" ]; then
+            echo "  $FOUND new repo(s) — triggering aggregate"
+            gh workflow run aggregate.yml --repo bounded-systems/content-catalog
+          else
+            echo "  no new repos — skipping aggregate trigger"
+          fi
+
       - name: Upload report
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:

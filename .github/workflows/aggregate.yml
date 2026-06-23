@@ -4,6 +4,8 @@ name: aggregate
 # content-token catalogs, gate with string-audit's prose + grounding rules,
 # attest the result (SLSA Build L2), and commit the merged catalog back.
 #
+# Also triggered by bootstrap when it writes new sentinels.
+#
 # Consumers verify provenance:
 #   gh attestation verify catalog.merged.json --owner bounded-systems
 #
@@ -12,7 +14,7 @@ name: aggregate
 
 on:
   schedule:
-    - cron: "0 6 * * *" # daily 06:00 UTC
+    - cron: "0 6 * * 1-5" # weekdays 06:00 UTC (Mon–Fri)
   workflow_dispatch:
 
 permissions:
@@ -30,7 +32,7 @@ jobs:
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           repository: bounded-systems/string-audit
-          # Pin to a release tag for reproducibility; bump here to pick up gate fixes.
+          # Pin to a release tag; bump to pick up gate rule fixes.
           ref: v0.6.0
           path: .string-audit
 
@@ -46,6 +48,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ORG: bounded-systems
         run: node aggregate.mjs
+
+      - name: Verify catalog is non-empty before gating + attesting
+        run: |
+          COUNT=$(node -e "const c=JSON.parse(require('fs').readFileSync('catalog.merged.json','utf8'));console.log(Object.keys(c).filter(k=>!k.startsWith('\$')).length)")
+          echo "  symbols: $COUNT"
+          [ "$COUNT" -gt "0" ] || { echo "::error::catalog.merged.json is empty — aggregate.mjs found no opted-in repos"; exit 1; }
 
       - name: Content gate (prose + grounding — strict)
         env:
