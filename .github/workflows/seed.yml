@@ -1,0 +1,51 @@
+name: seed
+
+# Seeds content/strings.json for every opted-in repo that doesn't have one.
+# Manual only — run once after bootstrap to plant minimal name/description tokens.
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: "Preview only — do not commit catalogs"
+        type: boolean
+        default: true
+      repo:
+        description: "Single repo to target (leave blank for all)"
+        type: string
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  seed:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version: "22"
+
+      - run: npm ci --no-audit --no-fund
+
+      - name: Seed catalogs
+        env:
+          GITHUB_TOKEN: ${{ secrets.BOOTSTRAP_TOKEN || secrets.GITHUB_TOKEN }}
+          ORG: bounded-systems
+        run: |
+          ARGS=""
+          if [ "${{ inputs.dry-run }}" = "false" ]; then
+            ARGS="--write"
+          fi
+          if [ -n "${{ inputs.repo }}" ]; then
+            ARGS="$ARGS --repo=${{ inputs.repo }}"
+          fi
+          node seed.mjs $ARGS
+
+      - name: Upload report
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: seed-report
+          path: seed-report.json
