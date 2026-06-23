@@ -1,0 +1,39 @@
+{
+  "brand.name": {
+    "$value": "Bounded Systems",
+    "$description": "Org name — exact casing.",
+    "$source": "brand"
+  },
+  "brand.tagline": {
+    "$value": "Bounded authority for AI agents",
+    "$description": "Primary tagline — hero / link cards / titles.",
+    "$source": "brand"
+  },
+  "brand.description": {
+    "$value": "Capability security for AI agents — authority drawn at the door, not the process or container. Every claim graded against the running code.",
+    "$description": "One-line description — meta description (kept ≤160 chars), intros.",
+    "$source": "brand"
+  },
+  "brand.thesis": {
+    "$value": "Draw the boundary at the door — a scope-bounded set of capabilities an agent acts through, not the process, not the container.",
+    "$description": "The core bet, stated once.",
+    "$source": "brand"
+  },
+  "brand.keywords": {
+    "$value": "CAPABILITY SECURITY · AGENT INFRASTRUCTURE · AI · DEVELOPER TOOLS",
+    "$description": "Short all-caps keyword strip — SVG headers, meta keywords.",
+    "$source": "brand"
+  },
+  "$provenance": {
+    "org": "bounded-systems",
+    "generated": "2026-06-23T18:28:42.309Z",
+    "sources": {
+      "brand": {
+        "sha": "96cd1d918935b442c5b4bd45cf12a4787a93b7a3",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 5
+      }
+    }
+  }
+}
