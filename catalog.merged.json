@@ -51,16 +51,16 @@
   },
   "$provenance": {
     "org": "bounded-systems",
-    "generated": "2026-06-23T18:37:32.658Z",
+    "generated": "2026-06-23T19:03:03.670Z",
     "sources": {
       "brand": {
-        "sha": "1e264fd9519e6dfa36088840d22fd83a7e2b64a9",
+        "sha": "c1ad970cdd0dee888b5100e540bb4970ecaebf2c",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 5
       },
       "site": {
-        "sha": "56a348a855af427125d8bd1492627ed7f5132f97",
+        "sha": "91d22351182d250b214346d56c42fee8cb532dfb",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 5
