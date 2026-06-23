@@ -1,0 +1,10 @@
+{
+  "name": {
+    "type": "name",
+    "value": "Content Catalog"
+  },
+  "description": {
+    "type": "meta",
+    "value": "Org-wide content token catalog — aggregated from opted-in repos, gated and attested by string-audit."
+  }
+}
