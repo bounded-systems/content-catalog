@@ -10,9 +10,14 @@
 // Usage:
 //   node bootstrap.mjs                  # full scan, dry run
 //   node bootstrap.mjs --write          # scan + commit sentinels to discovered repos
+//   node bootstrap.mjs --write --all    # write sentinel to EVERY repo (catalog or not)
 //   node bootstrap.mjs --repo=<name>    # focus on one repo
 //   node bootstrap.mjs --json           # machine-readable output to stdout
 //   node bootstrap.mjs --help
+//
+// --all: adds a default sentinel ({ "catalogPath": "content/strings.json" }) to every
+//   repo that doesn't have one yet — opted-in repos get a catalog path when they're
+//   ready; the aggregate skips repos whose catalog path doesn't exist yet.
 //
 // Env: GITHUB_TOKEN (required), ORG (default: bounded-systems)
 
@@ -23,8 +28,9 @@ if (args.includes("--help") || args.includes("-h")) {
   console.log(`
 bootstrap.mjs — token coverage + org bootstrapper
 
-  node bootstrap.mjs             full scan, dry run
-  node bootstrap.mjs --write     scan + commit sentinels to discovered repos
+  node bootstrap.mjs              full scan, dry run
+  node bootstrap.mjs --write      scan + commit sentinels to discovered repos
+  node bootstrap.mjs --write --all  commit default sentinel to EVERY repo
   node bootstrap.mjs --repo=X    single repo only
   node bootstrap.mjs --json      machine-readable report to stdout
 
@@ -34,8 +40,11 @@ bootstrap.mjs — token coverage + org bootstrapper
 }
 
 const write = args.includes("--write");
+const all = args.includes("--all");
 const jsonOut = args.includes("--json");
 const singleRepo = (args.find((a) => a.startsWith("--repo=")) ?? "").slice("--repo=".length) || null;
+
+const DEFAULT_SENTINEL = { catalogPath: "content/strings.json" };
 
 const token = process.env.GITHUB_TOKEN;
 if (!token) { console.error("bootstrap: GITHUB_TOKEN env var required"); process.exit(1); }
@@ -281,7 +290,7 @@ if (!jsonOut) {
 
 // ── Write sentinels ────────────────────────────────────────────────────────────
 if (write && discovered.length) {
-  console.log(`  ── WRITING SENTINELS ${"─".repeat(34)}`);
+  console.log(`  ── WRITING SENTINELS (discovered) ${"─".repeat(21)}`);
   for (const r of discovered) {
     const config = { catalogPath: r.catalogPath };
     if (r.groundingPath) config.groundingPath = r.groundingPath;
@@ -293,8 +302,32 @@ if (write && discovered.length) {
   console.log();
 }
 
+// --all: add a default sentinel to every repo not yet opted in
+let allWritten = 0;
+if (write && all) {
+  const unenrolled = [...dark, ...clean];
+  if (unenrolled.length) {
+    console.log(`  ── WRITING DEFAULT SENTINELS (${unenrolled.length} repos) ${"─".repeat(10)}`);
+    console.log(`  default catalogPath: ${DEFAULT_SENTINEL.catalogPath}`);
+    console.log();
+    for (const r of unenrolled) {
+      const content = JSON.stringify(DEFAULT_SENTINEL, null, 2) + "\n";
+      const url = await commitFile(r.repo ?? r, ".string-audit.json", content, "chore: opt in to content-catalog (default sentinel — add content/strings.json when ready)");
+      if (url) { console.log(`  ✓ ${(r.repo ?? r).padEnd(28)} → ${url}`); allWritten++; }
+      else      console.warn(`  ✗ ${(r.repo ?? r).padEnd(28)} commit failed`);
+    }
+    console.log();
+  }
+} else if (!write && all) {
+  const unenrolled = [...dark, ...clean];
+  console.log(`  ── ALL MODE (dry run) — would add default sentinel to ${unenrolled.length} repos ${"─".repeat(4)}`);
+  for (const r of unenrolled) console.log(`  · ${r.repo ?? r}`);
+  console.log(`\n  → re-run with --write --all to commit\n`);
+}
+
 // ── Machine-readable output ───────────────────────────────────────────────────
-const report = { org, write, scanned: repos.length, optedIn, discovered, dark: dark.map((r) => r.repo), clean: clean.map((r) => r.repo) };
+const found = [...discovered, ...(all ? [...dark, ...clean] : [])];
+const report = { org, write, all, scanned: repos.length, optedIn, discovered, dark: dark.map((r) => r.repo), clean: clean.map((r) => r.repo), found };
 writeFileSync("bootstrap-report.json", JSON.stringify(report, null, 2));
 if (!jsonOut) console.log(`  wrote: bootstrap-report.json\n`);
 else process.stdout.write(JSON.stringify(report, null, 2) + "\n");

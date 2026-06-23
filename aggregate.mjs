@@ -54,6 +54,7 @@ console.log(`\n  ${org}: ${repos.length} repos\n`);
 const merged = {};
 const groundingSet = new Set();
 const sources = {};
+let noCatalog = 0; // opted-in but catalog path not yet populated
 
 for (const { name: repo, default_branch } of repos) {
   const raw = await fileText(repo, ".string-audit.json");
@@ -65,7 +66,7 @@ for (const { name: repo, default_branch } of repos) {
 
   const catalogPath = config.catalogPath ?? "dist/catalog.json";
   const catalogText = await fileText(repo, catalogPath);
-  if (!catalogText) { console.warn(`  ${repo}: catalog not found at ${catalogPath} — skipping`); continue; }
+  if (!catalogText) { noCatalog++; continue; } // opted-in but catalog not yet added
 
   let catalog;
   try { catalog = JSON.parse(catalogText); }
@@ -98,9 +99,11 @@ for (const { name: repo, default_branch } of repos) {
 
 const total = Object.keys(merged).length;
 if (!total) {
-  console.error("\n  no symbols — add a .string-audit.json sentinel to at least one repo");
+  console.error("\n  no symbols — add a content catalog to at least one opted-in repo");
   process.exit(1);
 }
+
+if (noCatalog) console.log(`  (${noCatalog} opted-in repo${noCatalog !== 1 ? "s" : ""} have no catalog yet — add content/strings.json when ready)`);
 
 // Embed provenance as $-prefixed metadata (loadCatalog in string-audit skips these)
 merged["$provenance"] = {

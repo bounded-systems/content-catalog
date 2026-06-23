@@ -20,6 +20,10 @@ on:
         description: "Scan only — do not commit sentinels"
         type: boolean
         default: true
+      all:
+        description: "Add default sentinel to every repo (not just discovered ones)"
+        type: boolean
+        default: false
       repo:
         description: "Single repo name to target (leave blank for all)"
         type: string
@@ -51,6 +55,9 @@ jobs:
           # (boolean dispatch inputs are strings "true"/"false" in shell)
           if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ inputs.dry-run }}" = "false" ]; then
             ARGS="--write"
+          fi
+          if [ "${{ inputs.all }}" = "true" ]; then
+            ARGS="$ARGS --all"
           fi
           if [ -n "${{ inputs.repo }}" ]; then
             ARGS="$ARGS --repo=${{ inputs.repo }}"
