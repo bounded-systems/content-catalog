@@ -36,19 +36,19 @@ async function gh(path, opts = {}) {
 }
 
 async function fileText(repo, path) {
-  const d = await gh(`repos/${org}/${repo}/contents/${encodeURIComponent(path)}`);
+  const d = await gh(`repos/${org}/${repo}/contents/${path.split('/').map(encodeURIComponent).join('/')}`);
   if (!d?.content) return null;
   return Buffer.from(d.content, "base64").toString("utf8");
 }
 
 async function commitFile(repo, path, content, message) {
-  const existing = await gh(`repos/${org}/${repo}/contents/${encodeURIComponent(path)}`);
+  const existing = await gh(`repos/${org}/${repo}/contents/${path.split('/').map(encodeURIComponent).join('/')}`);
   const body = {
     message,
     content: Buffer.from(content).toString("base64"),
     ...(existing?.sha ? { sha: existing.sha } : {}),
   };
-  const r = await gh(`repos/${org}/${repo}/contents/${encodeURIComponent(path)}`, {
+  const r = await gh(`repos/${org}/${repo}/contents/${path.split('/').map(encodeURIComponent).join('/')}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),

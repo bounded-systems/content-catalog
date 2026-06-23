@@ -36,7 +36,7 @@ async function gh(path) {
 }
 
 async function fileText(repo, filePath) {
-  const d = await gh(`repos/${org}/${repo}/contents/${encodeURIComponent(filePath)}`);
+  const d = await gh(`repos/${org}/${repo}/contents/${filePath.split('/').map(encodeURIComponent).join('/')}`);
   if (!d?.content) return null;
   return Buffer.from(d.content, "base64").toString("utf8");
 }
