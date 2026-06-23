@@ -31,8 +31,7 @@ jobs:
         with:
           repository: bounded-systems/string-audit
           # Pin to a release tag for reproducibility; bump here to pick up gate fixes.
-          # Use 'main' only until v0.6.0 is tagged.
-          ref: main
+          ref: v0.6.0
           path: .string-audit
 
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
