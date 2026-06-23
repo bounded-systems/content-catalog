@@ -24,12 +24,43 @@
     "$description": "Short all-caps keyword strip — SVG headers, meta keywords.",
     "$source": "brand"
   },
+  "site.hero-pitch": {
+    "$value": "Your coding agent wanders. Keep it inside the job you gave it.",
+    "$description": "Hero sub-headline — the problem in one line.",
+    "$source": "site"
+  },
+  "site.section-model": {
+    "$value": "The model, made physical",
+    "$description": "Section heading — the capability-model diagram.",
+    "$source": "site"
+  },
+  "site.section-proof": {
+    "$value": "The proof is the code",
+    "$description": "Section heading — claims graded against running code.",
+    "$source": "site"
+  },
+  "site.byline": {
+    "$value": "Built by Robert DeLanghe — in public, against running code.",
+    "$description": "Author byline / colophon.",
+    "$source": "site"
+  },
+  "site.contact-cta": {
+    "$value": "Get in touch",
+    "$description": "Contact call-to-action label.",
+    "$source": "site"
+  },
   "$provenance": {
     "org": "bounded-systems",
-    "generated": "2026-06-23T18:28:42.309Z",
+    "generated": "2026-06-23T18:37:32.658Z",
     "sources": {
       "brand": {
-        "sha": "96cd1d918935b442c5b4bd45cf12a4787a93b7a3",
+        "sha": "1e264fd9519e6dfa36088840d22fd83a7e2b64a9",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 5
+      },
+      "site": {
+        "sha": "56a348a855af427125d8bd1492627ed7f5132f97",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 5
