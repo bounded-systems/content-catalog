@@ -1,0 +1,12 @@
+{
+  "name": "@bounded-systems/content-catalog",
+  "version": "0.1.0",
+  "description": "Org-wide content token catalog — aggregated from opted-in repos, gated and attested by string-audit.",
+  "type": "module",
+  "private": true,
+  "license": "PolyForm-Noncommercial-1.0.0",
+  "dependencies": {
+    "an-array-of-english-words": "^2.0.0",
+    "write-good": "^1.0.8"
+  }
+}

@@ -1,0 +1,69 @@
+name: aggregate
+
+# Nightly org-wide content catalog: discover opted-in repos, merge their
+# content-token catalogs, gate with string-audit's prose + grounding rules,
+# attest the result (SLSA Build L2), and commit the merged catalog back.
+#
+# Consumers verify provenance:
+#   gh attestation verify catalog.merged.json --owner bounded-systems
+#
+# Opt a repo in by adding .string-audit.json to its root:
+#   { "catalogPath": "dist/catalog.json", "groundingPath": "dist/grounding.json" }
+
+on:
+  schedule:
+    - cron: "0 6 * * *" # daily 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write    # commit merged catalog back to this repo
+  id-token: write    # OIDC token for SLSA attestation
+  attestations: write
+
+jobs:
+  aggregate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Checkout string-audit (audit-gate.mjs + prose.mjs)
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          repository: bounded-systems/string-audit
+          # Pin to a release tag for reproducibility; bump here to pick up gate fixes.
+          # Use 'main' only until v0.6.0 is tagged.
+          ref: main
+          path: .string-audit
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22"
+
+      - name: Install deps (prose.mjs needs an-array-of-english-words + write-good)
+        run: npm ci --no-audit --no-fund
+
+      - name: Discover + merge catalogs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ORG: bounded-systems
+        run: node aggregate.mjs
+
+      - name: Content gate (prose + grounding — strict)
+        env:
+          CATALOG: ${{ github.workspace }}/catalog.merged.json
+          GROUNDING: ${{ github.workspace }}/grounding.merged.json
+        run: node .string-audit/audit-gate.mjs --strict
+
+      - name: Attest catalog provenance (SLSA Build L2)
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: catalog.merged.json
+
+      - name: Commit merged catalog
+        run: |
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add catalog.merged.json grounding.merged.json
+          git diff --staged --quiet && echo "catalog unchanged" && exit 0
+          git commit -m "chore: refresh merged catalog $(date -u +%Y-%m-%d)"
+          git push
