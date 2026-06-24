@@ -816,7 +816,7 @@
   },
   "$provenance": {
     "org": "bounded-systems",
-    "generated": "2026-06-23T19:50:19.996Z",
+    "generated": "2026-06-24T08:50:09.991Z",
     "sources": {
       ".github": {
         "sha": "0ba0d47620418700762190cf6d62313ebddcfb76",
@@ -825,7 +825,7 @@
         "symbols": 2
       },
       ".github-private": {
-        "sha": "8b0b31cbf3c7618e38835eb8dd8bf5ddbb4673e5",
+        "sha": "bad999e6b713ff64913745569432f5a84a12fa4e",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
@@ -891,7 +891,7 @@
         "symbols": 1
       },
       "content-catalog": {
-        "sha": "8f1e9bbb5f786c4dc122798bf1add6c772ead1c2",
+        "sha": "d6d781674c3d79d5160484e89f17edbb3040524c",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
@@ -1011,7 +1011,7 @@
         "symbols": 3
       },
       "gh-project-room": {
-        "sha": "e9021b631572e06f626c0b136a1f5c9ed322393c",
+        "sha": "03457d1f583ff77fef6e9d13e75bbeacdcd6d2f2",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
@@ -1041,7 +1041,7 @@
         "symbols": 3
       },
       "hooksmith": {
-        "sha": "90637abb48d08fd57f0cc60426efc2e635770182",
+        "sha": "b420f3b1e25b9d0187c66103e7d8fa392fb522e6",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
@@ -1077,7 +1077,7 @@
         "symbols": 4
       },
       "ocap-provenance": {
-        "sha": "758251009d397c661250c0ff7e44c563a8ccb7b8",
+        "sha": "d7a268c24d0384466d7412b3d4e54eb25759c25e",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
@@ -1089,13 +1089,13 @@
         "symbols": 3
       },
       "proc": {
-        "sha": "738fdd4790156550c5cf60d9f84b8f6625a0f570",
+        "sha": "c95f03f26a745e2a0e560b0e9b031241b38e807b",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
       },
       "prx": {
-        "sha": "513c2bdba29f666ce72b874d06f9c80b5fa21288",
+        "sha": "585be9c96e3eed8640219ba1fb58447d2cb4ada7",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
@@ -1125,7 +1125,7 @@
         "symbols": 3
       },
       "site": {
-        "sha": "91d22351182d250b214346d56c42fee8cb532dfb",
+        "sha": "9ad8f78f1c3aa9a6bc1739506fb9aee602e6a885",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 5
@@ -1137,7 +1137,7 @@
         "symbols": 4
       },
       "string-audit": {
-        "sha": "58491aad16fd807c2befaca6ae13740a115edb8c",
+        "sha": "47df42b4383d8a7cafafcb308a5b1e19134a67de",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
