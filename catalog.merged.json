@@ -816,7 +816,7 @@
   },
   "$provenance": {
     "org": "bounded-systems",
-    "generated": "2026-06-25T08:48:25.027Z",
+    "generated": "2026-06-26T08:46:54.633Z",
     "sources": {
       ".github": {
         "sha": "0ba0d47620418700762190cf6d62313ebddcfb76",
@@ -891,7 +891,7 @@
         "symbols": 1
       },
       "content-catalog": {
-        "sha": "d6ba602a0d5acb7ae88d6b6287b01a87fbfa9759",
+        "sha": "dafc0fa8e745945443f994764fdd64a925d9dfff",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
@@ -1023,7 +1023,7 @@
         "symbols": 3
       },
       "git-ast": {
-        "sha": "9e080228b1ade9be00feb3279f6b51b7c68f2c2e",
+        "sha": "6cdeb82f8dc02f5a9dfc2f94152d1029b28a1171",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
@@ -1041,7 +1041,7 @@
         "symbols": 3
       },
       "hooksmith": {
-        "sha": "b420f3b1e25b9d0187c66103e7d8fa392fb522e6",
+        "sha": "412781b9d1f93c2c4889228f24c8e91f78795a93",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
