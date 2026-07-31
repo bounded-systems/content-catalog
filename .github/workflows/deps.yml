@@ -1,0 +1,97 @@
+name: deps
+# Dependency scanning via the org's shared lane (infra#104, ci-workflows#1).
+#
+# STANDARDIZED ORG-WIDE CALLER — copy this file byte-identical to
+# .github/workflows/deps.yml in the adopting repo. Do not tailor it per repo: the
+# scanner version, its sha256, and the deno.lock converter all live in the reusable
+# workflow (one definition), and a fleet of identical callers means the next bump is
+# one review of one diff, applied everywhere by the same sed.
+#
+# "BYTE-IDENTICAL" NOW MEANS BYTE-IDENTICAL. It previously carried one sanctioned
+# divergence — the `report-only: true` grace line each repo deleted once its findings
+# cleared — but the template no longer ships that line, so an adopter and this file
+# should match exactly. Any difference is drift, including a stale pin.
+#
+# The one legitimate exception is a repo that genuinely could not clear a finding
+# during adoption and therefore carries a DATED grace block (see the posture note
+# below). That is a deliberate, reviewable, self-expiring divergence — not drift.
+#
+# Unlike the canonical script, nothing gates this: templates/ has no drift lane
+# against its callers, so a caller left behind is invisible until someone diffs it.
+# That is exactly how the two 2026-07-30 adopters ended up four commits back with
+# nobody noticing (ci-workflows#10). Until such a gate exists, re-pin the callers in
+# the same change that bumps this file.
+#
+# NOT every consumer is a byte-identical copy. A repo that already has a single
+# combined test workflow may call the reusable lane from inside it instead (infra's
+# infra-test.yml does). Those are legitimate and are NOT measured against this file
+# — but they still carry a pin, and it still goes stale the same way.
+#
+# What a green check means: every lockfile ecosystem osv-scanner supports, plus the
+# npm subset of any v4/v5 deno.lock (converted in-lane). Still not scannable by
+# anything today, and logged per run: jsr-native deps and @jsr/* npm-compat mirrors
+# (OSV has no JSR ecosystem). A repo with nothing scannable passes rather than
+# red-lining.
+#
+# Failure posture is HARD-FAIL, and this template now ships it that way — no `with:`
+# block at all. Adopt as-is and the check is honest from its first run: green means
+# genuinely clean.
+#
+# THIS REVERSES THE EARLIER DEFAULT, on evidence. The template used to ship
+# `report-only: true` because 5 of the first 8 repos scanned carried pre-existing
+# advisories, so blocking adoption on remediation looked like it would leave most
+# repos uninstrumented. That rate did not hold — waves 3–6 were almost entirely
+# clean, six repos in total rather than forty (ci-workflows#8). Shipping grace to
+# everyone to spare the few cost more than it saved: 30 repos later needed a
+# second sweep to take the flag back off, and while it was on it masked a CVSS 8.8
+# on `site` behind a green check.
+#
+# IF ADOPTION IS BLOCKED BY A PRE-EXISTING FINDING, work REMEDIATION.md first —
+# start at rung 1, stop at the first rung that works. Most reds clear with a relock.
+# Only if the finding cannot be cleared in the adoption PR, add grace, AND DATE IT:
+#
+#     with:
+#       report-only: true
+#       grace-expires: "YYYY-MM-DD"   # a real date, not a placeholder
+#
+# From that date findings fail hard again. Omit the date and the lane warns on every
+# run that the grace is unbounded — because unbounded grace is the
+# required-baseline.yml failure (infra#135), a control that reads green while gating
+# nothing. A malformed date fails CLOSED; a typo must not be the permissive setting.
+#
+# Grace downgrades VULNERABILITY findings only. A tool or network failure still fails
+# hard in every mode — a lane that cannot run must never report green.
+#
+# Progress tracked in ci-workflows#2.
+#
+# The reviewable escape hatch for an accepted or unfixable finding is an
+# osv-scanner.toml [[IgnoredVulns]] entry next to the lockfile, with a written reason
+# AND an `ignoreUntil` date — osv-scanner expires the entry itself and the finding
+# returns. Full triage order in REMEDIATION.md: start at rung 1, stop at the first
+# rung that works, and do not skip to an acceptance.
+#
+# The weekly rescan exists because advisories are published against locks that are
+# not changing: a repo that merges rarely would otherwise stay green on stale
+# information indefinitely. Tuesday, one day after ci-workflows' Monday self-test —
+# the canary catches a broken digest or release URL fleet-wide BEFORE the fleet
+# rescans on it.
+#
+# NOT path-filtered, deliberately: a check that is skipped on some PRs cannot be
+# made a required check without the skipped-required-check problem.
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "23 7 * * 2"
+  workflow_dispatch: {}
+concurrency:
+  group: deps-${{ github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+jobs:
+  osv:
+    # SHA-pinned per org policy. `# main` records what the SHA was at the time, so a
+    # reviewer can tell an intentional bump from a drifted one.
+    uses: bounded-systems/ci-workflows/.github/workflows/osv-scan.yml@162accbbcfdfd12c146c44f23770e6a6bb9abb1c # main
