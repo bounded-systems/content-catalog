@@ -7,9 +7,14 @@ name: bootstrap
 # Schedule: weekly (Sundays 23:00 UTC) — always writes; triggers aggregate after.
 # Manual: workflow_dispatch — dry-run by default; set dry-run=false to commit.
 #
-# Requires BOOTSTRAP_TOKEN secret: a PAT with `repo` scope across the org.
-# Without it the scan still works (GITHUB_TOKEN reads public repos), but
-# --write falls back to GITHUB_TOKEN which can only write to this repo.
+# Requires BOOTSTRAP_TOKEN secret: an org-wide credential with `repo` scope.
+# Without it the scan still works (GITHUB_TOKEN reads PUBLIC repos), but the
+# fallback can only write to this repo — and it reads only public ones, so
+# private repos are invisible to the scan either way.
+#
+# The read-only lane keeps that fallback; the WRITE lane fails closed (#10).
+# The original degraded mode wrote nothing and reported success, so a --write
+# run with no credential was indistinguishable from one that had nothing to do.
 
 on:
   schedule:
@@ -45,8 +50,34 @@ jobs:
 
       - run: npm ci --no-audit --no-fund
 
+      # FAIL CLOSED on the write lane — #10. The fallback below can only write
+      # to THIS repo, so a --write run without the credential visits every repo,
+      # writes no sentinel anywhere, and exits green. Refuse instead; the
+      # read-only lane (dry-run dispatch) still runs on the fallback.
+      - name: Preflight — the write lane has its credential
+        env:
+          HAS_PAT: ${{ secrets.BOOTSTRAP_TOKEN != '' }}
+          WRITES: ${{ github.event_name == 'schedule' || inputs.dry-run == false }}
+        run: |
+          set -euo pipefail
+          if [ "$WRITES" = "true" ] && [ "$HAS_PAT" != "true" ]; then
+            echo "::error title=bootstrap did NOT write::BOOTSTRAP_TOKEN is empty and this is a" \
+              "write run (schedule, or dry-run=false). The GITHUB_TOKEN fallback can only write" \
+              "to bounded-systems/content-catalog, so no sentinel would be committed to any other" \
+              "repo and the run would still go green. Restore the credential (preferably an OIDC" \
+              "broker mint, not a new long-lived PAT — see #10), or dispatch with dry-run=true to" \
+              "scan without writing."
+            exit 1
+          fi
+          if [ "$HAS_PAT" != "true" ]; then
+            echo "::warning::BOOTSTRAP_TOKEN is empty — scanning on the GITHUB_TOKEN fallback," \
+              "which reads PUBLIC repos only. Private repos will not appear in this report."
+          fi
+
       - name: Bootstrap sentinels
         env:
+          # Fallback retained for the read-only lane only; the preflight above
+          # refuses the write lane when it would resolve to GITHUB_TOKEN.
           GITHUB_TOKEN: ${{ secrets.BOOTSTRAP_TOKEN || secrets.GITHUB_TOKEN }}
           ORG: bounded-systems
         run: |
