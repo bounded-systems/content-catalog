@@ -30,8 +30,30 @@ jobs:
 
       - run: npm ci --no-audit --no-fund
 
+      # FAIL CLOSED on the write lane — #10. Same shape as bootstrap: the
+      # fallback can only write to THIS repo, so `dry-run=false` without the
+      # credential seeds nothing anywhere and still exits green.
+      - name: Preflight — the write lane has its credential
+        env:
+          HAS_PAT: ${{ secrets.BOOTSTRAP_TOKEN != '' }}
+          WRITES: ${{ inputs.dry-run == false }}
+        run: |
+          set -euo pipefail
+          if [ "$WRITES" = "true" ] && [ "$HAS_PAT" != "true" ]; then
+            echo "::error title=seed did NOT write::BOOTSTRAP_TOKEN is empty and dry-run=false." \
+              "The GITHUB_TOKEN fallback can only write to bounded-systems/content-catalog, so no" \
+              "catalog would be seeded in any other repo and the run would still go green." \
+              "Restore the credential (see #10), or re-dispatch with dry-run=true."
+            exit 1
+          fi
+          if [ "$HAS_PAT" != "true" ]; then
+            echo "::warning::BOOTSTRAP_TOKEN is empty — previewing on the GITHUB_TOKEN fallback," \
+              "which reads PUBLIC repos only. Private repos are absent from this preview."
+          fi
+
       - name: Seed catalogs
         env:
+          # Fallback retained for the dry-run lane only — see the preflight above.
           GITHUB_TOKEN: ${{ secrets.BOOTSTRAP_TOKEN || secrets.GITHUB_TOKEN }}
           ORG: bounded-systems
         run: |

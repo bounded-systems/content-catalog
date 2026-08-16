@@ -43,9 +43,37 @@ jobs:
       - name: Install deps (prose.mjs needs an-array-of-english-words + write-good)
         run: npm ci --no-audit --no-fund
 
+      # FAIL CLOSED — #10. aggregate.mjs enumerates the org with
+      # `GET /orgs/{org}/repos` (aggregate.mjs:47). The repo-scoped GITHUB_TOKEN
+      # sees PUBLIC repos only, so without BOOTSTRAP_TOKEN every private repo
+      # drops silently out of that enumeration. The non-empty guard below does
+      # NOT catch it — public repos still supply symbols — and the narrowed
+      # catalog is then committed AND attested, so a partial artifact would ship
+      # carrying full SLSA provenance. A missing credential must close the door,
+      # not quietly narrow what gets certified.
+      - name: Preflight — the org-wide credential resolves
+        env:
+          HAS_PAT: ${{ secrets.BOOTSTRAP_TOKEN != '' }}
+        run: |
+          set -euo pipefail
+          if [ "$HAS_PAT" != "true" ]; then
+            echo "::error title=aggregate did NOT run::BOOTSTRAP_TOKEN is empty, so the org" \
+              "enumeration would see public repos only and every private repo would drop out of" \
+              "catalog.merged.json — silently, because the non-empty guard still passes. The" \
+              "merged catalog is committed and attested, so this run would certify a partial" \
+              "artifact as complete. Restore the credential (preferably an OIDC broker mint," \
+              "not a new long-lived PAT — see #10) and re-run."
+            exit 1
+          fi
+
       - name: Discover + merge catalogs
         env:
-          GITHUB_TOKEN: ${{ secrets.BOOTSTRAP_TOKEN || secrets.GITHUB_TOKEN }}
+          # No `|| secrets.GITHUB_TOKEN` fallback here, deliberately: the
+          # preflight above guarantees the credential, and a fallback that can
+          # never be reached reads as a supported degraded mode that does not
+          # exist. The read-only lanes (bootstrap/seed/enrich dry-runs) DO keep
+          # theirs — see those files.
+          GITHUB_TOKEN: ${{ secrets.BOOTSTRAP_TOKEN }}
           ORG: bounded-systems
         run: node aggregate.mjs
 
