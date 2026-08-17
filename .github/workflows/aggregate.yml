@@ -33,13 +33,21 @@ jobs:
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           repository: bounded-systems/string-audit
-          # Pin to a release tag; bump to pick up gate rule fixes.
+          # Pinned to an immutable commit SHA; bump to pick up gate rule fixes.
           #
           # THIS PIN IS LOAD-BEARING FOR grounding.merged.json's SHAPE (#14). aggregate.mjs
-          # emits grounding keyed by repo; a gate older than v0.8.0 calls .some() on it and
-          # dies. Do not lower this pin without reverting aggregate.mjs to a flat array —
-          # and do not raise aggregate.mjs's shape ahead of a released gate that reads it.
-          ref: v0.8.0
+          # emits grounding keyed by repo; a gate that predates string-audit#73 calls
+          # .some() on it and dies. Do not lower this pin without reverting aggregate.mjs
+          # to a flat array — and do not raise aggregate.mjs's shape ahead of a gate that
+          # reads it.
+          #
+          # This was `v0.8.0` — a tag that does not exist. #16 pinned the version mint was
+          # PREDICTED to cut from string-audit#73, on the assumption that #73 would merge
+          # and release first; both merged within the same minute and no release was cut,
+          # so every run would have died at this checkout. Pinning the merge commit removes
+          # the dependency on a release existing at all, and matches how `site` pins this
+          # same repo. Move it to the release tag once one is cut, if you prefer a tag.
+          ref: 59c38668e822410c989c614557f03eb30218402c # string-audit#73 (grounding namespacing)
           path: .string-audit
 
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
