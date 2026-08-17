@@ -17,6 +17,7 @@ on:
 
 permissions:
   contents: read
+  id-token: write # OIDC → cf-token-broker, for the catalog-seed door
 
 jobs:
   seed:
@@ -30,31 +31,36 @@ jobs:
 
       - run: npm ci --no-audit --no-fund
 
-      # FAIL CLOSED on the write lane — #10. Same shape as bootstrap: the
-      # fallback can only write to THIS repo, so `dry-run=false` without the
-      # credential seeds nothing anywhere and still exits green.
-      - name: Preflight — the write lane has its credential
+      # FAIL CLOSED — #10. Same shape as bootstrap: the old fallback could only
+      # write to THIS repo, so `dry-run=false` without the org-wide credential
+      # seeded nothing anywhere and still exited green.
+      - name: Preflight — the broker is configured
         env:
-          HAS_PAT: ${{ secrets.BOOTSTRAP_TOKEN != '' }}
-          WRITES: ${{ inputs.dry-run == false }}
+          BROKER: ${{ vars.CF_BROKER_URL }}
         run: |
           set -euo pipefail
-          if [ "$WRITES" = "true" ] && [ "$HAS_PAT" != "true" ]; then
-            echo "::error title=seed did NOT write::BOOTSTRAP_TOKEN is empty and dry-run=false." \
-              "The GITHUB_TOKEN fallback can only write to bounded-systems/content-catalog, so no" \
-              "catalog would be seeded in any other repo and the run would still go green." \
-              "Restore the credential (see #10), or re-dispatch with dry-run=true."
+          if [ -z "${BROKER:-}" ]; then
+            echo "::error title=seed did NOT run::CF_BROKER_URL is unset, so no token can be" \
+              "minted. There is deliberately no GITHUB_TOKEN fallback — it can only write to" \
+              "bounded-systems/content-catalog. Set the org variable."
             exit 1
           fi
-          if [ "$HAS_PAT" != "true" ]; then
-            echo "::warning::BOOTSTRAP_TOKEN is empty — previewing on the GITHUB_TOKEN fallback," \
-              "which reads PUBLIC repos only. Private repos are absent from this preview."
-          fi
+
+      # The `catalog-seed` door (infra#387/#395), pinned to THIS workflow at
+      # refs/heads/main. Minted on the dry-run lane too — see bootstrap.yml for
+      # why a preview on the weaker token is the worse option.
+      - name: Mint the catalog-seed token via the OIDC broker
+        id: app-token
+        uses: bounded-systems/.github/.github/actions/broker-gh-token@d1b25e3bb48ba919f2af0f1ab83063a1d76d88d4 # broker-gh-token (prx-26bq), .github#109
+        with:
+          app: catalog-seed
+          broker-url: ${{ vars.CF_BROKER_URL }}
+          require: contents
 
       - name: Seed catalogs
         env:
-          # Fallback retained for the dry-run lane only — see the preflight above.
-          GITHUB_TOKEN: ${{ secrets.BOOTSTRAP_TOKEN || secrets.GITHUB_TOKEN }}
+          # The brokered token — org-wide contents:write. No fallback by design.
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
           ORG: bounded-systems
           # Inputs as env vars, never `${{ }}` in the script body — see bootstrap.yml
           # for the reasoning. `repo` is free text and was the live sink.
