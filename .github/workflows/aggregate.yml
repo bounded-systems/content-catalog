@@ -34,7 +34,12 @@ jobs:
         with:
           repository: bounded-systems/string-audit
           # Pin to a release tag; bump to pick up gate rule fixes.
-          ref: v0.6.0
+          #
+          # THIS PIN IS LOAD-BEARING FOR grounding.merged.json's SHAPE (#14). aggregate.mjs
+          # emits grounding keyed by repo; a gate older than v0.8.0 calls .some() on it and
+          # dies. Do not lower this pin without reverting aggregate.mjs to a flat array —
+          # and do not raise aggregate.mjs's shape ahead of a released gate that reads it.
+          ref: v0.8.0
           path: .string-audit
 
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
