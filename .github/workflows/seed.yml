@@ -56,15 +56,24 @@ jobs:
           # Fallback retained for the dry-run lane only — see the preflight above.
           GITHUB_TOKEN: ${{ secrets.BOOTSTRAP_TOKEN || secrets.GITHUB_TOKEN }}
           ORG: bounded-systems
+          # Inputs as env vars, never `${{ }}` in the script body — see bootstrap.yml
+          # for the reasoning. `repo` is free text and was the live sink.
+          DRY_RUN: ${{ inputs.dry-run }}
+          REPO: ${{ inputs.repo }}
         run: |
-          ARGS=""
-          if [ "${{ inputs.dry-run }}" = "false" ]; then
-            ARGS="--write"
+          set -euo pipefail
+          case "${REPO:-}" in
+            "") ;;
+            (*[!A-Za-z0-9._-]*) echo "::error::repo '$REPO' is not a plain repository name"; exit 1 ;;
+          esac
+          ARGS=()
+          if [ "$DRY_RUN" = "false" ]; then
+            ARGS+=(--write)
           fi
-          if [ -n "${{ inputs.repo }}" ]; then
-            ARGS="$ARGS --repo=${{ inputs.repo }}"
+          if [ -n "${REPO:-}" ]; then
+            ARGS+=("--repo=$REPO")
           fi
-          node seed.mjs $ARGS
+          node seed.mjs "${ARGS[@]}"
 
       - name: Upload report
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6

@@ -80,20 +80,37 @@ jobs:
           # refuses the write lane when it would resolve to GITHUB_TOKEN.
           GITHUB_TOKEN: ${{ secrets.BOOTSTRAP_TOKEN || secrets.GITHUB_TOKEN }}
           ORG: bounded-systems
+          # Every dispatch input arrives as an ENV VAR, never as `${{ }}` inside the
+          # script body. The template engine substitutes before bash ever sees the
+          # text, so an interpolated free-text input is not a shell string — it is
+          # shell SOURCE. `repo` is the free-text one and was the live sink.
+          EVENT_NAME: ${{ github.event_name }}
+          DRY_RUN: ${{ inputs.dry-run }}
+          ALL: ${{ inputs.all }}
+          REPO: ${{ inputs.repo }}
         run: |
-          ARGS=""
+          set -euo pipefail
+          # Validate before use, in the shape claim-ticket.yml already uses for the
+          # same class of input: refuse anything that is not a plain repo name rather
+          # than trying to escape it.
+          case "${REPO:-}" in
+            "") ;;
+            (*[!A-Za-z0-9._-]*) echo "::error::repo '$REPO' is not a plain repository name"; exit 1 ;;
+          esac
+          # Array, not a string: no word-splitting of anything caller-supplied.
+          ARGS=()
           # schedule always writes; dispatch respects dry-run input
           # (boolean dispatch inputs are strings "true"/"false" in shell)
-          if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ inputs.dry-run }}" = "false" ]; then
-            ARGS="--write"
+          if [ "$EVENT_NAME" = "schedule" ] || [ "$DRY_RUN" = "false" ]; then
+            ARGS+=(--write)
           fi
-          if [ "${{ inputs.all }}" = "true" ]; then
-            ARGS="$ARGS --all"
+          if [ "$ALL" = "true" ]; then
+            ARGS+=(--all)
           fi
-          if [ -n "${{ inputs.repo }}" ]; then
-            ARGS="$ARGS --repo=${{ inputs.repo }}"
+          if [ -n "${REPO:-}" ]; then
+            ARGS+=("--repo=$REPO")
           fi
-          node bootstrap.mjs $ARGS
+          node bootstrap.mjs "${ARGS[@]}"
 
       - name: Trigger aggregate (if new sentinels were written)
         # Only fire when we actually wrote something — avoids a spurious aggregate run
