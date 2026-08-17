@@ -7,14 +7,20 @@ name: bootstrap
 # Schedule: weekly (Sundays 23:00 UTC) — always writes; triggers aggregate after.
 # Manual: workflow_dispatch — dry-run by default; set dry-run=false to commit.
 #
-# Requires BOOTSTRAP_TOKEN secret: an org-wide credential with `repo` scope.
-# Without it the scan still works (GITHUB_TOKEN reads PUBLIC repos), but the
-# fallback can only write to this repo — and it reads only public ones, so
-# private repos are invisible to the scan either way.
+# Auth = the `catalog-bootstrap` door, brokered (infra#387/#395): the job proves
+# its identity with GitHub Actions OIDC and exchanges it at the cf-token-broker
+# for a short-lived installation token scoped to contents:write, pinned to THIS
+# workflow at refs/heads/main. No App key and no PAT in this repo. Needs the org
+# variable CF_BROKER_URL (not a secret).
 #
-# The read-only lane keeps that fallback; the WRITE lane fails closed (#10).
-# The original degraded mode wrote nothing and reported success, so a --write
-# run with no credential was indistinguishable from one that had nothing to do.
+# This replaced the BOOTSTRAP_TOKEN secret — a long-lived org-wide PAT, revoked
+# 2026-08-16 in an account credential audit. It read
+# `secrets.BOOTSTRAP_TOKEN || secrets.GITHUB_TOKEN`, and that fallback is the
+# whole reason #10 exists: GITHUB_TOKEN can only write to THIS repo and reads
+# only PUBLIC ones, so a --write run without the PAT visited every repo, wrote
+# nothing anywhere, and exited green. FAILS CLOSED now, on both lanes — a
+# brokered mint has no weaker sibling to fall back to, so the preflight the
+# fallback made necessary is now just the mint itself.
 
 on:
   schedule:
@@ -37,6 +43,7 @@ on:
 permissions:
   contents: read
   actions: write # needed to trigger aggregate after writing sentinels
+  id-token: write # OIDC → cf-token-broker, for the catalog-bootstrap door
 
 jobs:
   bootstrap:
@@ -50,35 +57,45 @@ jobs:
 
       - run: npm ci --no-audit --no-fund
 
-      # FAIL CLOSED on the write lane — #10. The fallback below can only write
-      # to THIS repo, so a --write run without the credential visits every repo,
-      # writes no sentinel anywhere, and exits green. Refuse instead; the
-      # read-only lane (dry-run dispatch) still runs on the fallback.
-      - name: Preflight — the write lane has its credential
+      # FAIL CLOSED — #10. The old GITHUB_TOKEN fallback could only write to THIS
+      # repo, so a --write run without the org-wide credential visited every repo,
+      # wrote no sentinel anywhere, and exited green.
+      - name: Preflight — the broker is configured
         env:
-          HAS_PAT: ${{ secrets.BOOTSTRAP_TOKEN != '' }}
-          WRITES: ${{ github.event_name == 'schedule' || inputs.dry-run == false }}
+          BROKER: ${{ vars.CF_BROKER_URL }}
         run: |
           set -euo pipefail
-          if [ "$WRITES" = "true" ] && [ "$HAS_PAT" != "true" ]; then
-            echo "::error title=bootstrap did NOT write::BOOTSTRAP_TOKEN is empty and this is a" \
-              "write run (schedule, or dry-run=false). The GITHUB_TOKEN fallback can only write" \
-              "to bounded-systems/content-catalog, so no sentinel would be committed to any other" \
-              "repo and the run would still go green. Restore the credential (preferably an OIDC" \
-              "broker mint, not a new long-lived PAT — see #10), or dispatch with dry-run=true to" \
-              "scan without writing."
+          if [ -z "${BROKER:-}" ]; then
+            echo "::error title=bootstrap did NOT run::CF_BROKER_URL is unset, so no token can be" \
+              "minted. There is deliberately no GITHUB_TOKEN fallback: it can only write to" \
+              "bounded-systems/content-catalog, so the run would visit every repo, write nothing," \
+              "and go green. Set the org variable."
             exit 1
           fi
-          if [ "$HAS_PAT" != "true" ]; then
-            echo "::warning::BOOTSTRAP_TOKEN is empty — scanning on the GITHUB_TOKEN fallback," \
-              "which reads PUBLIC repos only. Private repos will not appear in this report."
-          fi
+
+      # The `catalog-bootstrap` door (infra#387/#395), pinned to THIS workflow at
+      # refs/heads/main. `require: contents` asserts the granted scope BEFORE any
+      # work, so a narrowed door fails at the mint naming the gap rather than
+      # 403-ing partway through a sweep with some repos already written.
+      #
+      # Minted on BOTH lanes, including dry-run. The door is per-workflow, so the
+      # alternative is a GITHUB_TOKEN fallback for previews — which is exactly the
+      # silent public-repos-only degradation #10 removed. A dry-run preview that
+      # quietly omits private repos is a worse failure than a slightly
+      # over-scoped preview.
+      - name: Mint the catalog-bootstrap token via the OIDC broker
+        id: app-token
+        uses: bounded-systems/.github/.github/actions/broker-gh-token@d1b25e3bb48ba919f2af0f1ab83063a1d76d88d4 # broker-gh-token (prx-26bq), .github#109
+        with:
+          app: catalog-bootstrap
+          broker-url: ${{ vars.CF_BROKER_URL }}
+          require: contents
 
       - name: Bootstrap sentinels
         env:
-          # Fallback retained for the read-only lane only; the preflight above
-          # refuses the write lane when it would resolve to GITHUB_TOKEN.
-          GITHUB_TOKEN: ${{ secrets.BOOTSTRAP_TOKEN || secrets.GITHUB_TOKEN }}
+          # The brokered token — org-wide contents:write, so sentinels land in
+          # other repos. No fallback by design; see the preflight above.
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
           ORG: bounded-systems
           # Every dispatch input arrives as an ENV VAR, never as `${{ }}` inside the
           # script body. The template engine substitutes before bash ever sees the

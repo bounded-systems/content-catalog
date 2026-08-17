@@ -45,35 +45,48 @@ jobs:
 
       # FAIL CLOSED — #10. aggregate.mjs enumerates the org with
       # `GET /orgs/{org}/repos` (aggregate.mjs:47). The repo-scoped GITHUB_TOKEN
-      # sees PUBLIC repos only, so without BOOTSTRAP_TOKEN every private repo
-      # drops silently out of that enumeration. The non-empty guard below does
-      # NOT catch it — public repos still supply symbols — and the narrowed
+      # sees PUBLIC repos only, so without an org-wide credential every private
+      # repo drops silently out of that enumeration. The non-empty guard below
+      # does NOT catch it — public repos still supply symbols — and the narrowed
       # catalog is then committed AND attested, so a partial artifact would ship
       # carrying full SLSA provenance. A missing credential must close the door,
       # not quietly narrow what gets certified.
-      - name: Preflight — the org-wide credential resolves
+      - name: Preflight — the broker is configured
         env:
-          HAS_PAT: ${{ secrets.BOOTSTRAP_TOKEN != '' }}
+          BROKER: ${{ vars.CF_BROKER_URL }}
         run: |
           set -euo pipefail
-          if [ "$HAS_PAT" != "true" ]; then
-            echo "::error title=aggregate did NOT run::BOOTSTRAP_TOKEN is empty, so the org" \
-              "enumeration would see public repos only and every private repo would drop out of" \
-              "catalog.merged.json — silently, because the non-empty guard still passes. The" \
-              "merged catalog is committed and attested, so this run would certify a partial" \
-              "artifact as complete. Restore the credential (preferably an OIDC broker mint," \
-              "not a new long-lived PAT — see #10) and re-run."
+          if [ -z "${BROKER:-}" ]; then
+            echo "::error title=aggregate did NOT run::CF_BROKER_URL is unset, so no token can be" \
+              "minted and the org enumeration would see public repos only — every private repo" \
+              "would drop out of catalog.merged.json silently, because the non-empty guard still" \
+              "passes. The catalog is committed AND attested, so this run would certify a partial" \
+              "artifact as complete. Set the org variable; do not fall back to GITHUB_TOKEN."
             exit 1
           fi
 
+      # The `catalog-aggregate` door (infra#387/#395): OIDC in, short-lived
+      # installation token out, pinned to THIS workflow at refs/heads/main. No
+      # long-lived PAT anywhere — the App key lives only in the broker.
+      #
+      # NO `require:` HERE, DELIBERATELY. The action's assertion checks for a
+      # scope granted at WRITE, and this door is contents:READ by design — it
+      # enumerates and reads, and commits the merged catalog to THIS repo on the
+      # built-in GITHUB_TOKEN below. Declaring `require: contents` would fail the
+      # mint on a correctly-scoped door. The three write lanes do declare it.
+      - name: Mint the catalog-aggregate token via the OIDC broker
+        id: app-token
+        uses: bounded-systems/.github/.github/actions/broker-gh-token@d1b25e3bb48ba919f2af0f1ab83063a1d76d88d4 # broker-gh-token (prx-26bq), .github#109
+        with:
+          app: catalog-aggregate
+          broker-url: ${{ vars.CF_BROKER_URL }}
+
       - name: Discover + merge catalogs
         env:
-          # No `|| secrets.GITHUB_TOKEN` fallback here, deliberately: the
-          # preflight above guarantees the credential, and a fallback that can
-          # never be reached reads as a supported degraded mode that does not
-          # exist. The read-only lanes (bootstrap/seed/enrich dry-runs) DO keep
-          # theirs — see those files.
-          GITHUB_TOKEN: ${{ secrets.BOOTSTRAP_TOKEN }}
+          # The brokered token — org-wide contents:read, so private repos are
+          # visible to the enumeration. No fallback: a mint failure is a red run,
+          # which is the whole point of #10.
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
           ORG: bounded-systems
         run: node aggregate.mjs
 
