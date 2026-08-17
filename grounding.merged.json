@@ -14,5 +14,22 @@
     "container",
     "running code",
     "claim graded"
+  ],
+  "site": [
+    "docs generate from source",
+    "fail ci on drift",
+    "behaviour specs execute",
+    "graded against the running code",
+    "reproducible build",
+    "sbom",
+    "signed release manifest",
+    "content digests",
+    "in-toto",
+    "slsa",
+    "signed per-actor",
+    "content-addressed in a derivation ledger",
+    "fail-closed at the merge gate",
+    "broker daemon",
+    "never holds the credential"
   ]
 }
