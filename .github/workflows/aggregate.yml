@@ -18,8 +18,9 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write    # commit merged catalog back to this repo
-  id-token: write    # OIDC token for SLSA attestation
+  contents: write       # write the refresh BRANCH (not main — see #15)
+  pull-requests: write  # open the refresh PR; main is PR-only by org ruleset
+  id-token: write       # OIDC token for SLSA attestation, and the broker mint
   attestations: write
 
 jobs:
@@ -107,11 +108,72 @@ jobs:
         with:
           subject-path: catalog.merged.json
 
-      - name: Commit merged catalog
+      # PROPOSE the refreshed catalog; do not push it. #15.
+      #
+      # This step used to `git push` straight to main, which cannot work: the org's
+      # default-branch-protection ruleset covers ~ALL repos and demands a pull
+      # request, verified signatures and linear history. Every run was rejected with
+      # GH013 AFTER doing all the expensive work — enumerate 92 repos, gate, attest —
+      # so the lane built a complete attested catalog and then could not store it.
+      #
+      # Two rules, and only one of them is about signing. `signed-commit` writes via
+      # GraphQL createCommitOnBranch so the commit is GitHub-SIGNED (a runner's
+      # `git commit` is not), but a signed commit pushed to main is still refused:
+      # "changes must be made through a pull request" is independent. Hence a branch
+      # plus a PR, which is also the org's one-auditable-pipeline rule finally
+      # applying to this lane rather than being sidestepped by it.
+      #
+      # Two files, so two writes onto the same branch; the PR is opened separately
+      # below, guarded on either write having actually changed something, so an
+      # unchanged night proposes nothing instead of opening an empty PR.
+      - name: Publish catalog.merged.json to a branch (signed)
+        id: pub-catalog
+        uses: bounded-systems/.github/.github/actions/signed-commit@bf15e558da0cb27364fc15090d80fc705e052e43 # signed-commit
+        with:
+          path: catalog.merged.json
+          branch: catalog/refresh-${{ github.run_id }}
+          base: main
+          message: "chore: refresh merged catalog (run ${{ github.run_id }})"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # An unsigned commit here is worse than no commit: it cannot merge under
+          # the signature rule, so it would leave a dead branch and a green step.
+          fail-if-unsigned: "true"
+
+      - name: Publish grounding.merged.json to the same branch (signed)
+        id: pub-grounding
+        uses: bounded-systems/.github/.github/actions/signed-commit@bf15e558da0cb27364fc15090d80fc705e052e43 # signed-commit
+        with:
+          path: grounding.merged.json
+          branch: catalog/refresh-${{ github.run_id }}
+          base: main
+          message: "chore: refresh merged grounding (run ${{ github.run_id }})"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fail-if-unsigned: "true"
+
+      - name: Open the refresh PR (only when something changed)
+        if: ${{ steps.pub-catalog.outputs.changed == 'true' || steps.pub-grounding.outputs.changed == 'true' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: catalog/refresh-${{ github.run_id }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          CATALOG_CHANGED: ${{ steps.pub-catalog.outputs.changed }}
+          GROUNDING_CHANGED: ${{ steps.pub-grounding.outputs.changed }}
         run: |
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config user.name "github-actions[bot]"
-          git add catalog.merged.json grounding.merged.json
-          git diff --staged --quiet && echo "catalog unchanged" && exit 0
-          git commit -m "chore: refresh merged catalog $(date -u +%Y-%m-%d)"
-          git push
+          set -euo pipefail
+          body="$(cat <<PR_BODY_EOF
+          Automated catalog refresh from [run ${GITHUB_RUN_ID}](${RUN_URL}).
+
+          - \`catalog.merged.json\` changed: ${CATALOG_CHANGED}
+          - \`grounding.merged.json\` changed: ${GROUNDING_CHANGED}
+
+          Produced by the \`aggregate\` lane: org-wide discovery over opted-in repos
+          using a brokered \`catalog-aggregate\` token, gated by string-audit's prose
+          and grounding rules under \`--strict\`, and attested (SLSA Build L2) before
+          this PR was opened. Merging is the last step, not a rubber stamp — the gate
+          and the attestation already ran against exactly these bytes.
+          PR_BODY_EOF
+          )"
+          gh pr create --base main --head "$BRANCH" \
+            --title "chore: refresh merged catalog (run ${GITHUB_RUN_ID})" \
+            --body "$body" --draft \
+            || gh pr edit "$BRANCH" --body "$body"
