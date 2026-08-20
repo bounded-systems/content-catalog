@@ -939,16 +939,16 @@
   },
   "$provenance": {
     "org": "bounded-systems",
-    "generated": "2026-08-17T01:58:34.324Z",
+    "generated": "2026-08-20T06:23:26.507Z",
     "sources": {
       ".github": {
-        "sha": "4e6418cc0fc8b2c1c6e5770a98bbd8d561016039",
+        "sha": "d33bdafab4a0ea32eb03352474a52d7406f78964",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
       },
       ".github-private": {
-        "sha": "e91eabecbd1e8e7289267e47c637854f4bd55f48",
+        "sha": "62c9750a66b35f8771971af05926e01ba25e83ab",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
@@ -960,7 +960,7 @@
         "symbols": 3
       },
       "anchored-chain-sqlite": {
-        "sha": "98b71de5b4c570971064956950e24356ee8bc676",
+        "sha": "78820318d881d572d706ddc8d4493f55b6b777c4",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
@@ -1003,7 +1003,7 @@
         "symbols": 3
       },
       "claude-box": {
-        "sha": "4c2a3b7b50cff36f642e45ff6ca27256380c98e1",
+        "sha": "45baa4717f13fe8c240c16429f60d2aacecc8099",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
@@ -1015,7 +1015,7 @@
         "symbols": 1
       },
       "content-catalog": {
-        "sha": "cd0adf15371923d3e05a920116b94d9460cc6b94",
+        "sha": "53a1653f5639b5e0ccb53547409dedf51b213a47",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
@@ -1111,7 +1111,7 @@
         "symbols": 1
       },
       "fold-engine": {
-        "sha": "0f3aa87a876efd5124cfb4d51dd8bb4ad633a34e",
+        "sha": "d3b9de2f9c4bdc788b32530a56b87bb1a436c097",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
@@ -1219,7 +1219,7 @@
         "symbols": 3
       },
       "prx": {
-        "sha": "075ba7bc304a3c7397874526cec853308e7d7634",
+        "sha": "36e9af667289e47f9b2be24cc27c2217fa938fcf",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
@@ -1280,7 +1280,7 @@
         "symbols": 2
       },
       "verbspec": {
-        "sha": "0ea4fb83ed2152149c0c61b3b54ace1d26a54288",
+        "sha": "860d3bd46c29014c303b9e9828c5cb6a5f54201d",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
