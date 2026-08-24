@@ -30,6 +30,8 @@
     "content-addressed in a derivation ledger",
     "fail-closed at the merge gate",
     "broker daemon",
-    "never holds the credential"
+    "never holds the credential",
+    "fail the build on drift",
+    "specs execute against the engine"
   ]
 }
