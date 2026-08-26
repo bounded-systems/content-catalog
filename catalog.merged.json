@@ -715,123 +715,108 @@
     "$source": "site"
   },
   "site.hero-pitch": {
-    "$value": "Your coding agent wanders. Keep it inside the job you gave it.",
-    "$description": "Hero sub-headline — the problem in one line.",
+    "$value": "Your coding agent runs with your access. Bounded Systems puts a checkpoint in front of it.",
+    "$description": "Hero headline — the problem and the move, in one line.",
     "$source": "site"
   },
-  "site.section-model": {
-    "$value": "The model, in running code",
-    "$description": "Section heading — the capability-model diagram.",
+  "site.section-whats-here": {
+    "$value": "What's here",
+    "$description": "Section heading — the three repos.",
     "$source": "site"
   },
-  "site.section-proof": {
-    "$value": "The proof is the code",
-    "$description": "Section heading — claims graded against running code.",
+  "site.section-deeper": {
+    "$value": "If you want to go deeper",
+    "$description": "Section heading — verification, the map, the writing.",
     "$source": "site"
   },
-  "site.byline": {
-    "$value": "Built by Robert DeLanghe — in public, against running code.",
-    "$description": "Author byline / colophon.",
+  "site.section-who": {
+    "$value": "Who",
+    "$description": "Section heading — the colophon.",
     "$source": "site"
   },
-  "site.contact-cta": {
-    "$value": "Get in touch",
-    "$description": "Contact call-to-action label.",
+  "site.repo-guest-room": {
+    "$value": "The runtime that scopes an agent",
+    "$description": "Repo card title — guest-room.",
     "$source": "site"
   },
-  "site.cta-read-bet": {
-    "$value": "Read the bet",
-    "$description": "Hero primary CTA — jumps to the bet section.",
+  "site.repo-claude-box": {
+    "$value": "Claude Code running inside that scope",
+    "$description": "Repo card title — claude-box.",
     "$source": "site"
   },
-  "site.proof-guest-room-title": {
-    "$value": "The library that scopes what an agent can do",
-    "$description": "Proof card title — guest-room.",
+  "site.repo-prx": {
+    "$value": "The pipeline",
+    "$description": "Repo card title — prx.",
     "$source": "site"
   },
-  "site.proof-prx-title": {
-    "$value": "The CLI that runs agent tasks at scale",
-    "$description": "Proof card title — prx.",
-    "$source": "site"
-  },
-  "site.proof-claude-box-title": {
-    "$value": "Claude Code, scoped to one room",
-    "$description": "Proof card title — claude-box.",
+  "site.try-it": {
+    "$value": "Try it",
+    "$description": "Label on the clone-and-run card.",
     "$source": "site"
   },
   "site.honesty-heading": {
-    "$value": "Every claim here is graded against the running code.",
-    "$description": "Honesty section heading.",
+    "$value": "Status, graded",
+    "$description": "Status section heading — the grade ladder.",
     "$source": "site"
   },
-  "site.proof-tag-flagship": {
-    "$value": "Flagship",
-    "$description": "Proof card tag — guest-room.",
+  "site.grade-enforced": {
+    "$value": "Enforced",
+    "$description": "Grade name — proven by a check that fails the build.",
     "$source": "site"
   },
-  "site.proof-tag-at-scale": {
-    "$value": "At scale",
-    "$description": "Proof card tag — prx.",
+  "site.grade-partial": {
+    "$value": "Partial",
+    "$description": "Grade name — works, with a named gap.",
     "$source": "site"
   },
-  "site.proof-start-here": {
-    "$value": "guest-room — the model you can run",
-    "$description": "Proof 'start here' card label.",
+  "site.grade-aspirational": {
+    "$value": "Aspirational",
+    "$description": "Grade name — the bet, not the result.",
     "$source": "site"
   },
-  "site.proof-provenance-heading": {
-    "$value": "Provenance you can open",
-    "$description": "Proof provenance card heading.",
+  "site.grade-enforced-def": {
+    "$value": "A check proves it, and the build fails without it.",
+    "$description": "What Enforced means.",
     "$source": "site"
   },
-  "site.proof-build-heading": {
-    "$value": "This whole site proves its own build",
-    "$description": "Proof build-provenance card heading.",
+  "site.grade-partial-def": {
+    "$value": "Works, with a named gap.",
+    "$description": "What Partial means.",
     "$source": "site"
   },
-  "site.proof-seams-heading": {
-    "$value": "The capability seams",
-    "$description": "Proof capability-seams card heading.",
+  "site.grade-aspirational-def": {
+    "$value": "The bet, not yet the result.",
+    "$description": "What Aspirational means.",
     "$source": "site"
   },
-  "site.bet-heading": {
-    "$value": "The bet",
-    "$description": "The bet section heading (visually conveyed by the section number; sr-only for the document outline).",
+  "site.deeper-verify": {
+    "$value": "Verify this site yourself.",
+    "$description": "Lead-in — build provenance and its limit.",
     "$source": "site"
   },
-  "site.section-graph": {
-    "$value": "Every capability is a typed node; the edges are how they compose.",
-    "$description": "Section heading — the capability graph.",
+  "site.deeper-map": {
+    "$value": "The package map.",
+    "$description": "Lead-in — /map.",
     "$source": "site"
   },
-  "site.bet-grade-label": {
-    "$value": "This claim, graded:",
-    "$description": "Inline grade label on the bet.",
+  "site.deeper-writing": {
+    "$value": "Writing.",
+    "$description": "Lead-in — the blog.",
+    "$source": "site"
+  },
+  "site.byline": {
+    "$value": "I'm Bobby DeLanghe — Brooklyn, NY. I build agent infrastructure and capability-security systems.",
+    "$description": "Colophon byline.",
     "$source": "site"
   },
   "site.bio-talk": {
-    "$value": "If your team is chewing on the same problem, I'd like to talk.",
+    "$value": "If your team is chewing on the same problem, I'd like to talk:",
     "$description": "Colophon bio — contact prompt.",
     "$source": "site"
   },
-  "site.claim-docs": {
-    "$value": "Docs generate from source and fail CI on drift.",
-    "$description": "Honesty claim (ENFORCED) — typed `claim`, grounded in content/grounding.json.",
-    "$source": "site"
-  },
-  "site.claim-specs": {
-    "$value": "guest-room's behaviour specs execute against the engine.",
-    "$description": "Honesty claim (ENFORCED) — typed `claim`, grounded in content/grounding.json.",
-    "$source": "site"
-  },
-  "site.claim-provenance": {
-    "$value": "A git-write carries a verifiable in-toto / SLSA provenance derivation — signed per-actor, content-addressed in a derivation ledger, checked fail-closed at the merge gate.",
-    "$description": "Honesty claim (PARTIAL) — mechanisms verified in ocap-provenance/prx/anchored-chain; grounded; gap carried by the PARTIAL grade.",
-    "$source": "site"
-  },
-  "site.claim-broker": {
-    "$value": "The agent never holds the credential — a broker daemon does.",
-    "$description": "Honesty claim (PARTIAL) — verified in keeperd/daemon.ts + claude-box CAPABILITIES.md; grounded; macOS transport gap carried by the PARTIAL grade.",
+  "site.contact-cta": {
+    "$value": "hello@bounded.tools",
+    "$description": "Contact call-to-action label — the address itself, so the link says where it goes.",
     "$source": "site"
   },
   "slack.name": {
@@ -939,16 +924,16 @@
   },
   "$provenance": {
     "org": "bounded-systems",
-    "generated": "2026-08-17T01:58:34.324Z",
+    "generated": "2026-08-26T06:25:46.786Z",
     "sources": {
       ".github": {
-        "sha": "4e6418cc0fc8b2c1c6e5770a98bbd8d561016039",
+        "sha": "8db89f811e4b0bb5e682103ba1c595c4b1fe8c2d",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
       },
       ".github-private": {
-        "sha": "e91eabecbd1e8e7289267e47c637854f4bd55f48",
+        "sha": "2ce55d71e493c723b4f417521d151c3aafda349d",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
@@ -960,7 +945,7 @@
         "symbols": 3
       },
       "anchored-chain-sqlite": {
-        "sha": "98b71de5b4c570971064956950e24356ee8bc676",
+        "sha": "78820318d881d572d706ddc8d4493f55b6b777c4",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
@@ -984,13 +969,13 @@
         "symbols": 3
       },
       "bounded.tools": {
-        "sha": "2b44734edf9a75d953f1ed85c1700708568cae9f",
+        "sha": "e8bf72973970df49d6583f29d1fd62e1896a6705",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
       },
       "brand": {
-        "sha": "1bcebd50e3a273a1ff88c38bfd8d7404830bb17f",
+        "sha": "c925678300be445eddd6d369b412cfbd623f62a3",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 5,
@@ -1003,7 +988,7 @@
         "symbols": 3
       },
       "claude-box": {
-        "sha": "4c2a3b7b50cff36f642e45ff6ca27256380c98e1",
+        "sha": "45baa4717f13fe8c240c16429f60d2aacecc8099",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
@@ -1015,7 +1000,7 @@
         "symbols": 1
       },
       "content-catalog": {
-        "sha": "cd0adf15371923d3e05a920116b94d9460cc6b94",
+        "sha": "53a1653f5639b5e0ccb53547409dedf51b213a47",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
@@ -1075,7 +1060,7 @@
         "symbols": 2
       },
       "door-kit": {
-        "sha": "b1ec2db23d80030f8dfe7dd64f3ffa0ef7705128",
+        "sha": "8db97bf06d5204ef5c71f53dc418ea4ff06224ed",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
@@ -1111,7 +1096,7 @@
         "symbols": 1
       },
       "fold-engine": {
-        "sha": "0f3aa87a876efd5124cfb4d51dd8bb4ad633a34e",
+        "sha": "d3b9de2f9c4bdc788b32530a56b87bb1a436c097",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
@@ -1135,7 +1120,7 @@
         "symbols": 3
       },
       "gh-project-room": {
-        "sha": "76afa726331d1a890a3dfd5f90dead520e0f9ab3",
+        "sha": "d20dec088957581ee0d68f9c5d7b4f8311ca9f24",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
@@ -1159,7 +1144,7 @@
         "symbols": 4
       },
       "guest-room": {
-        "sha": "8473bdfd95ee3357603da8bad26ab0b876d8d61c",
+        "sha": "9aa5eb7a7a76ed50ffefc6a703f09a2bb3f32f64",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
@@ -1189,7 +1174,7 @@
         "symbols": 2
       },
       "lone": {
-        "sha": "01d0bcf15839f2f7e6c9e2d5fb7b73203275f92d",
+        "sha": "4f985fcd00dd4d6f9551907b692073876ab0cdaa",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
@@ -1201,7 +1186,7 @@
         "symbols": 4
       },
       "ocap-provenance": {
-        "sha": "9b5139de0b0d89a0908b67e6ca22a6eb697ce3df",
+        "sha": "cb0055364e3ec26b4313698b0667126768cad64d",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
@@ -1219,7 +1204,7 @@
         "symbols": 3
       },
       "prx": {
-        "sha": "075ba7bc304a3c7397874526cec853308e7d7634",
+        "sha": "7b468866f77ad9205238269df45565471f668f46",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
@@ -1249,10 +1234,10 @@
         "symbols": 3
       },
       "site": {
-        "sha": "8e2908896aab1f59fd8d3954d58125478f7b02e2",
+        "sha": "bd7e52f9718d91cd6873976aa911380bf8e65177",
         "branch": "main",
         "catalogPath": "content/strings.json",
-        "symbols": 25,
+        "symbols": 22,
         "groundingPath": "data/audit/grounding.json"
       },
       "slack": {
@@ -1280,7 +1265,7 @@
         "symbols": 2
       },
       "verbspec": {
-        "sha": "0ea4fb83ed2152149c0c61b3b54ace1d26a54288",
+        "sha": "4104373ffeba5b75f77c870977527e97d0f2e12e",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
