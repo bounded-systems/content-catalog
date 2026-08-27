@@ -51,7 +51,7 @@ jobs:
       # why a preview on the weaker token is the worse option.
       - name: Mint the catalog-seed token via the OIDC broker
         id: app-token
-        uses: bounded-systems/.github/.github/actions/broker-gh-token@d1b25e3bb48ba919f2af0f1ab83063a1d76d88d4 # broker-gh-token (prx-26bq), .github#109
+        uses: bounded-systems/.github/.github/actions/broker-gh-token@99e88a0335519cb78be8a1b6623105613fa6aca1 # broker-gh-token (prx-26bq), .github#109
         with:
           app: catalog-seed
           broker-url: ${{ vars.CF_BROKER_URL }}
