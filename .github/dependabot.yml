@@ -62,3 +62,33 @@ updates:
           - "*"
     commit-message:
       prefix: "ci"
+
+  # npm dependencies (package.json + its lockfile).
+  #
+  # ADDED because this repo took the shared template WHOLESALE instead of
+  # appending the github-actions entry to a config that already had npm — which
+  # is exactly what that template's own "ADOPTING THIS FILE" note directs:
+  # "Repo already has one (other ecosystems — npm, cargo, pip): APPEND the
+  # single github-actions entry below to its updates: list instead."
+  #
+  # The consequence was silent. With no npm entry there are no npm VERSION
+  # updates at all, which left Dependabot SECURITY updates as the only path a
+  # vulnerable package could ever be flagged by a PR — and those did not arrive
+  # here either. Known-vulnerable versions therefore sat in the lockfile
+  # indefinitely while the osv lane hard-failed on them every run, and the fix
+  # eventually had to be applied by hand.
+  #
+  # Grouped and weekly for the same reason the actions entry above is grouped:
+  # one PR per repo per week, not one per package.
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    groups:
+      npm:
+        patterns:
+          - "*"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
