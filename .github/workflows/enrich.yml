@@ -55,7 +55,7 @@ jobs:
       # refs/heads/main. Minted on the dry-run lane too — see bootstrap.yml.
       - name: Mint the catalog-enrich token via the OIDC broker
         id: app-token
-        uses: bounded-systems/.github/.github/actions/broker-gh-token@99e88a0335519cb78be8a1b6623105613fa6aca1 # broker-gh-token (prx-26bq), .github#109
+        uses: bounded-systems/.github/.github/actions/broker-gh-token@f0abde23ce4a8dc5042f80ee6a0919585b97d5e9 # broker-gh-token (prx-26bq), .github#109
         with:
           app: catalog-enrich
           broker-url: ${{ vars.CF_BROKER_URL }}
