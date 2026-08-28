@@ -90,7 +90,7 @@ jobs:
       # mint on a correctly-scoped door. The three write lanes do declare it.
       - name: Mint the catalog-aggregate token via the OIDC broker
         id: app-token
-        uses: bounded-systems/.github/.github/actions/broker-gh-token@99e88a0335519cb78be8a1b6623105613fa6aca1 # broker-gh-token (prx-26bq), .github#109
+        uses: bounded-systems/.github/.github/actions/broker-gh-token@f0abde23ce4a8dc5042f80ee6a0919585b97d5e9 # broker-gh-token (prx-26bq), .github#109
         with:
           app: catalog-aggregate
           broker-url: ${{ vars.CF_BROKER_URL }}
@@ -141,7 +141,7 @@ jobs:
       # unchanged night proposes nothing instead of opening an empty PR.
       - name: Publish catalog.merged.json to a branch (signed)
         id: pub-catalog
-        uses: bounded-systems/.github/.github/actions/signed-commit@99e88a0335519cb78be8a1b6623105613fa6aca1 # signed-commit
+        uses: bounded-systems/.github/.github/actions/signed-commit@f0abde23ce4a8dc5042f80ee6a0919585b97d5e9 # signed-commit
         with:
           path: catalog.merged.json
           branch: catalog/refresh-${{ github.run_id }}
@@ -154,7 +154,7 @@ jobs:
 
       - name: Publish grounding.merged.json to the same branch (signed)
         id: pub-grounding
-        uses: bounded-systems/.github/.github/actions/signed-commit@99e88a0335519cb78be8a1b6623105613fa6aca1 # signed-commit
+        uses: bounded-systems/.github/.github/actions/signed-commit@f0abde23ce4a8dc5042f80ee6a0919585b97d5e9 # signed-commit
         with:
           path: grounding.merged.json
           branch: catalog/refresh-${{ github.run_id }}
