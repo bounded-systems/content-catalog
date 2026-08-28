@@ -907,6 +907,11 @@
     "consumes": [],
     "$source": "trellis-private"
   },
+  "verb-router.name": {
+    "type": "name",
+    "value": "Verb Router",
+    "$source": "verb-router"
+  },
   "verbspec.name": {
     "type": "name",
     "value": "Verbspec",
@@ -924,16 +929,16 @@
   },
   "$provenance": {
     "org": "bounded-systems",
-    "generated": "2026-08-27T16:57:30.670Z",
+    "generated": "2026-08-28T17:47:49.200Z",
     "sources": {
       ".github": {
-        "sha": "3a2a4156942c7903e6d73c2514de3b19933e726e",
+        "sha": "0bb81373f3f585bf8f38ead95a5eed0bfdbdac67",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
       },
       ".github-private": {
-        "sha": "f0ce8ebec8dc7e7b79b704ef771aa8a2d397a6ca",
+        "sha": "da0ec9997c22aba9c45b93f10fcb43070ea62582",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
@@ -1000,7 +1005,7 @@
         "symbols": 1
       },
       "content-catalog": {
-        "sha": "d79ee555b578c4d1bbf914239da2064acca1e92f",
+        "sha": "dc3e7f2fe720cd133edcecbe0b81f229183b019b",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
@@ -1096,7 +1101,7 @@
         "symbols": 1
       },
       "fold-engine": {
-        "sha": "d3b9de2f9c4bdc788b32530a56b87bb1a436c097",
+        "sha": "cd23d7f39c86b25c8be35dd5ec6aefd2df87dd20",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
@@ -1120,7 +1125,7 @@
         "symbols": 3
       },
       "gh-project-room": {
-        "sha": "d20dec088957581ee0d68f9c5d7b4f8311ca9f24",
+        "sha": "04d61424723d21c413895cae3fd240547199e823",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
@@ -1144,13 +1149,13 @@
         "symbols": 4
       },
       "guest-room": {
-        "sha": "119cd4bc470ca1059da7cbf15abc355593f83601",
+        "sha": "bbb1f5c7604d35254da0f14f791146908a16a947",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
       },
       "hooksmith": {
-        "sha": "6a28ba1a1fc4534bc7c93983f1245d8a14af4bab",
+        "sha": "38793641efca1fe4c52a0d758dbd4c8ddf30dedf",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
@@ -1204,7 +1209,7 @@
         "symbols": 3
       },
       "prx": {
-        "sha": "d7ceece72c6e55245dd07ba35ebd8110b6885ac9",
+        "sha": "1afc46ff15968b8dc6aa0a782e1bef940b3c5423",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
@@ -1234,7 +1239,7 @@
         "symbols": 3
       },
       "site": {
-        "sha": "3a4ac1d8161a54670493c3ae7274a3646ec2c5ec",
+        "sha": "d996cfda6eba97b06234f07b6138e296316121e1",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 22,
@@ -1247,7 +1252,7 @@
         "symbols": 4
       },
       "string-audit": {
-        "sha": "32ee99bdb84b39805d7195a503c382e26b62e38f",
+        "sha": "4c8a3fdadd9bff54da298539c0e6335797b33fa6",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
@@ -1263,6 +1268,12 @@
         "branch": "main",
         "catalogPath": "catalog.json",
         "symbols": 2
+      },
+      "verb-router": {
+        "sha": "c92202080ad401f14325d34c6fb0c8afce77f70b",
+        "branch": "main",
+        "catalogPath": "content/strings.json",
+        "symbols": 1
       },
       "verbspec": {
         "sha": "8f2d6ed0ad34803ef9bfcee1f90865073b2c2d96",
