@@ -929,89 +929,89 @@
   },
   "$provenance": {
     "org": "bounded-systems",
-    "generated": "2026-08-28T17:47:49.200Z",
+    "generated": "2026-09-01T10:38:01.071Z",
     "sources": {
       ".github": {
-        "sha": "0bb81373f3f585bf8f38ead95a5eed0bfdbdac67",
+        "sha": "4f465d0bffbee609309468a541853095aefab6ad",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
       },
       ".github-private": {
-        "sha": "da0ec9997c22aba9c45b93f10fcb43070ea62582",
+        "sha": "275fc0cf88a59a3a587c418df5a42cca8c4427ff",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
       },
       "anchored-chain": {
-        "sha": "6bbc85e16b027e763e8ddd7e501043becd5a9d9e",
+        "sha": "4bdb9ffff4796859bfdc83a3a550c1f6418bd12a",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
       },
       "anchored-chain-sqlite": {
-        "sha": "78820318d881d572d706ddc8d4493f55b6b777c4",
+        "sha": "bb305750b91c91faf81ab078f5db9579e4f60ef0",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
       },
       "audit-context": {
-        "sha": "acc2a88adde0de0bacaf1b0b56acfc1aa7132877",
+        "sha": "9baf43d1054414614af0a673a66a49d5a958baaf",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 4
       },
       "auth": {
-        "sha": "2f56e3c6e0c26306989f354c3498fc305b36314d",
+        "sha": "1436b57896869686831ddd195e81abb35fe9da1e",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
       },
       "bd": {
-        "sha": "b0d8213946e26eeaa3386d16abd284bad5ac1af8",
+        "sha": "de50b137409093a9cef01d5d637659647695ebf4",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
       },
       "bounded.tools": {
-        "sha": "d6288c53977a7b3dd1a5424788b2571f2aaddf8b",
+        "sha": "17673d4735a7801b6fbf35963a9299ebc57d256a",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
       },
       "brand": {
-        "sha": "0f27d833e4a90200ae7145b438d6559ba79a425e",
+        "sha": "d48b351ad37fb60b9c4ccf9906e5efa42c5f1eb8",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 5,
         "groundingPath": "content/grounding.json"
       },
       "cas": {
-        "sha": "da28d75d6f7754bc58b61c76f2ecf08f9158a173",
+        "sha": "8d0cce9877d5b1a05e6746776dcb3aa67c32f4a6",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
       },
       "claude-box": {
-        "sha": "45baa4717f13fe8c240c16429f60d2aacecc8099",
+        "sha": "79ddf3c2aa24c3f12f4b3183ba12234ea9b92d2c",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
       },
       "claude-token-tools": {
-        "sha": "fc56474811b4b94a4c7e2787f38ec1c56bc5dd22",
+        "sha": "5eeb350be4854bc356c3cbab5b14f039936ad4e0",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 1
       },
       "content-catalog": {
-        "sha": "dc3e7f2fe720cd133edcecbe0b81f229183b019b",
+        "sha": "f823cca367d724fa8b8ca6a15b81707efb44263e",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
       },
       "dev-contracts": {
-        "sha": "9ff0ffacd6558ebc47aa4daf4992ebd15f8d5973",
+        "sha": "ef585cc08adcf0ba399e8303274076a0395e0cd7",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
@@ -1041,242 +1041,242 @@
         "symbols": 2
       },
       "dev-registry": {
-        "sha": "98af5119eaecf4249f4acdbdb6e9ab0925ff6c2f",
+        "sha": "7bcd1289cd30fe801040569fc3d06749545290fe",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
       },
       "disposition": {
-        "sha": "af3e7ef8ba9bbc43b39c6b5c2146eebf04601b90",
+        "sha": "94a4b75a8832f6940fe7d74fc5edabab498e7a2c",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
       },
       "door-concierge": {
-        "sha": "b04e54dcac9469f320cc5a0971ac0eb8824ff06d",
+        "sha": "30baa930b0722e6edf6aaf75be8bc9ed6b9c9650",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
       },
       "door-keeper": {
-        "sha": "35f1352dbf04a236142f08af089bdaf9c1b51297",
+        "sha": "70e42623bc2b0ab1b61bdfd167414649683a3bd5",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
       },
       "door-kit": {
-        "sha": "4b7063d1078c488f250e267a6b612bb0c8dc5479",
+        "sha": "ad51a960663006d7744d1199dbc08294cd8fb2a3",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
       },
       "door-net": {
-        "sha": "9676334bafce144cb69f281575a6b864e2b185c2",
+        "sha": "d8f33e8a49cdf69ab8cfafc896bb781609980331",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
       },
       "door-peercred": {
-        "sha": "6d7375dc5b2d3fc7b6353daecca3f6faae79ad4f",
+        "sha": "f6beb2998bc8a0d2d73665f51cae21507e2c2d72",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
       },
       "door-scout": {
-        "sha": "992ae1cf00f0891c75cd5002a07b67b478ea4082",
+        "sha": "f4bb596a4d5b0d83e3dbb6997187b002dcb23f22",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
       },
       "env": {
-        "sha": "e6c8a058b72b4ba9a0408de203915d043159fbfe",
+        "sha": "3d2980147a0df992a2a4a8248e8cd3a33a4d622b",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 4
       },
       "facilities": {
-        "sha": "3bfb1c6a539b88506c18e9808cf9098ae7c8cc96",
+        "sha": "aab9450e9b595a699b23af021537a284d7a31964",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 1
       },
       "fold-engine": {
-        "sha": "cd23d7f39c86b25c8be35dd5ec6aefd2df87dd20",
+        "sha": "c042b95b73a0827ef11410df14fd5f95adb69c30",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
       },
       "frond": {
-        "sha": "6a22521730f2e4379af5ae905569e6f18c7095c1",
+        "sha": "93dc58e8fef4ebf2829c513611024fd9e350ccec",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
       },
       "fs": {
-        "sha": "e0d650db91fe6bb82c91fbd40368dcfc36e39038",
+        "sha": "e72bd7dc3ec556829c972cbaa4617ab522e6cebb",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
       },
       "gh": {
-        "sha": "1a6b2ef08ae695e22d83114fb3737d2d44bffb67",
+        "sha": "ae17501d74ec87ffedbae393a58f6358c2098740",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
       },
       "gh-project-room": {
-        "sha": "04d61424723d21c413895cae3fd240547199e823",
+        "sha": "480a07d9a25993fb3e7d45a1d2efbcf746fa380b",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
       },
       "git": {
-        "sha": "aac636d56b6a7503c55adbc24fdbc5e53fc6ee19",
+        "sha": "4310afcaf2da93f88a87ac035e64ac420f670f34",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
       },
       "git-ast": {
-        "sha": "45e9b615ba09750b75d80d173997ae711f0b87c9",
+        "sha": "926fb9d748b4072ca29a6f53723338d03165cc24",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
       },
       "github-budget": {
-        "sha": "69d2701fc6b39895eb2eeffb25faa91693819f71",
+        "sha": "0e893fb90afdb2a8f9a4364fc176f4657a3e84ba",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 4
       },
       "guest-room": {
-        "sha": "bbb1f5c7604d35254da0f14f791146908a16a947",
+        "sha": "05cf6c754255708e864ebfe8e7e13df483ba2210",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
       },
       "hooksmith": {
-        "sha": "38793641efca1fe4c52a0d758dbd4c8ddf30dedf",
+        "sha": "77c274f1c14af11e3eccf5b9fb37f5dff5486d13",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
       },
       "host": {
-        "sha": "c0aa870b82677f41613a0c19b3d232d42337ce73",
+        "sha": "85512710726142e946803030db95f60247d24efc",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 4
       },
       "lima-devshell": {
-        "sha": "d81523e5ac2d6a530eccc1a89cc9da2325030b42",
+        "sha": "79d20c0ed21446798c8857607c5317f567f8beb6",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
       },
       "lobby": {
-        "sha": "0ddefe817222e41930d71f25e13f728b29918141",
+        "sha": "4919b2696718083409ef4234def043648ba40d2f",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
       },
       "lone": {
-        "sha": "44fc7cbfde77a74bedde1838071be335f4b9c46a",
+        "sha": "cf8fea188283dfa679ccd7c6429e6ce544a9430e",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
       },
       "machine-schema": {
-        "sha": "b20d754ce5ed823ff07de3470e48bdfa04bc444d",
+        "sha": "76852be9324406046cd9b6e1a708b30349449ff5",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 4
       },
       "ocap-provenance": {
-        "sha": "683333d8a026e2d924ec3a6f8e769b96edb01019",
+        "sha": "b6fa1afe06e2a02e6c4ae8d580671340c913af0e",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
       },
       "policy": {
-        "sha": "0449f9125380f57f026d527355bd6ed9d07bf374",
+        "sha": "ea23a0d30122da7a64d2b89d92bdf9fc88dc9465",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
       },
       "proc": {
-        "sha": "b98ad64cf46ecbefda0e38a33c20565c41915b5e",
+        "sha": "d18e4b9d6af1e022ac45688e37b2de7f002a4691",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
       },
       "prx": {
-        "sha": "1afc46ff15968b8dc6aa0a782e1bef940b3c5423",
+        "sha": "758fb8b40a31c27f8d98355ea1dbefe8a3169ae6",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
       },
       "repo-root": {
-        "sha": "3cc8405fd1901f5ecda984f6ecb920b3c327752b",
+        "sha": "f502e3863980b58e8c0bb3ad6886725984abf433",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 4
       },
       "schema-bridge": {
-        "sha": "4f8e7031a753fd99d98c2fb862b926b5bf1eba02",
+        "sha": "f44ac8a50db9603749dc642c992118741a264316",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
       },
       "schema-gen": {
-        "sha": "82bf44800a26c825ad0521d84ac36cc14362919f",
+        "sha": "7ecf2835887743a1901d57ecfe189b8921404dac",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 4
       },
       "scout": {
-        "sha": "8e573dc15f30e1d16e3af44d569dcce66454ac94",
+        "sha": "4660be062e7415d8e0aeb52a3db01b9782713a5c",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
       },
       "site": {
-        "sha": "d996cfda6eba97b06234f07b6138e296316121e1",
+        "sha": "a550c72acaaa2dd79f7dc928670e89b3602cae64",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 22,
         "groundingPath": "data/audit/grounding.json"
       },
       "slack": {
-        "sha": "ab3a03f2ca93f428abe29191b0107b3ada2df1c6",
+        "sha": "264f5b0f7ea86afdd867cfae38b25755e6ad539e",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 4
       },
       "string-audit": {
-        "sha": "4c8a3fdadd9bff54da298539c0e6335797b33fa6",
+        "sha": "78f7aaad134d6cdf90a7e93ff0835e5dcff1cbcb",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 2
       },
       "surface-sync": {
-        "sha": "52b1d2d26d7983ed33dbea25234df399c5aeda30",
+        "sha": "0b435b07a8626c78deb2a580baa04d44db4ec507",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 4
       },
       "trellis-private": {
-        "sha": "8609df2ea122585c2e2912e4c12f9f1088d761ca",
+        "sha": "8531cc5e7ba6560f859516c9f4d4cd857c883593",
         "branch": "main",
         "catalogPath": "catalog.json",
         "symbols": 2
       },
       "verb-router": {
-        "sha": "c92202080ad401f14325d34c6fb0c8afce77f70b",
+        "sha": "8d27644d7ae1d46c88e9e45fd68f95e8b89b9455",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 1
       },
       "verbspec": {
-        "sha": "8f2d6ed0ad34803ef9bfcee1f90865073b2c2d96",
+        "sha": "a23f41cfbeac40898dcb99b5336b8092568e2ce3",
         "branch": "main",
         "catalogPath": "content/strings.json",
         "symbols": 3
